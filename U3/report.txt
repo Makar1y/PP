@@ -1,0 +1,121 @@
+QUERY1
+23
+Jessie Damon
+Eve Druddle 
+Victor Note
+...
+
+QUERY2
+882
+Karl Sadman
+Jessie Sleight
+Kylie de Vito
+...
+
+QUERY3
+799
+Karl Sadman 
+Jessie Sleight
+Kylie de Vito
+...
+
+QUERY4
+482
+Eve Sadman
+Julie Hat
+Charlie Brighthill
+...
+
+QUERY5
+241
+Julie Hat
+Robert Doe
+Charlie Hat
+...
+
+QUERY6
+576
+Karl Sadman
+Jessie Sleight
+Kylie de Vito
+...
+
+QUERY7
+199
+Jessie Sleight
+Eve Sadman
+Jamie Sleight
+...
+
+QUERY8
+41
+Sole Hat
+Karl Brighthill
+Sole Damon
+...
+
+QUERY9
+246
+Arnold Davison
+Helen de Vito
+Richard Damon
+...
+
+QUERY10
+238
+Eve Note
+Sarah Madsen
+Jessie Damon
+...
+
+QUERY11
+530
+Karl Sadman
+Kylie de Vito
+Charlie Brighthill
+...
+
+QUERY12
+4
+Adam Gibbs
+Sarah Hat
+Debora Thornton
+...
+
+QUERY13
+50
+Arnold Davison
+Kim Doe
+Wilhelm Quarry
+...
+
+QUERY14
+999
+Karl Sadman
+Jessie Sleight
+Kylie de Vito
+...
+
+QUERY15
+18
+Wilhelm Davison
+Adam Gibbs
+Helen Thornton
+...
+
+QUERY16
+369
+Robert Doe
+Sarah Madsen
+Arnold Davison
+...
+
+QUERY17
+338
+Robert Doe
+Alice Druddle
+Sarah Madsen
+...
+
+QUERY18
+0
