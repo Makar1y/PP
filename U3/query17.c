@@ -47,13 +47,9 @@ int main(int argc, char *argv[]) {
 			if(s.load){ // *** first filter, conditions on the student
 				// printf went down :)
 				int anotherDemo = 0; // for counting courses/grades
-				char courses_for_count[1000] = "";
-				char course_grade[50] = "";
-				char for_num[5] = "";
-
-				strcpy(courses_for_count, "");
-				strcpy(course_grade, "");
-				strcpy(for_num, "");
+				char courses_for_count[1000] = {0};
+				char course_grade[50] = {0};
+				char for_num[5] = {0};
 
 				for (int i = 0; i < s.load; ++i){ // process each course taken by the student
 					strcpy(course_grade, s.courses[i]);

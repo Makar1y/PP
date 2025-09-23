@@ -8,7 +8,7 @@ int main() {
 
     // Entering number n
     printf("Please enter number: ");
-    while (1) {
+    while () {
         if (scanf("%d", &n) == 1 && getchar() == '\n') {
             break;
         } else {
@@ -25,13 +25,9 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         printf("Enter %d number: ", i + 1);
-        while (1) {
-            if (scanf("%d", &nums[0][i]) == 1 && getchar() == '\n') {
-                break;
-            } else {
-                while (getchar() != '\n');
-                printf("Error, try again: ");
-            }
+        while (scanf("%d", &nums[0][i]) != 1) {
+            while (getchar() != '\n');
+            printf("Error, try again: ");
         }
     }
 
