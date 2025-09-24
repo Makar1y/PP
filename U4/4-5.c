@@ -1,122 +1,89 @@
 #include <stdio.h>
 
 int main() {
-    int n;
-    int j1 = 0, j2 = 0, j3 = 0;
-    int max, min;
+    int n = 0;
+    double max = 0, min = 0, sum = 0, average = 0;
+
+
+    printf("Please enter natural number n, then n real numbers.\n");
+    printf("Program will print n nums Min and Max values, Sum and Average.\n\n");
 
 
     // Entering number n
-    printf("Please enter number: ");
-    while () {
-        if (scanf("%d", &n) == 1 && getchar() == '\n') {
-            break;
-        } else {
-            while (getchar() != '\n');
-            printf("Error, try again: ");
+    printf("Please enter number n: ");
+    while(n <= 0) {
+        while (1) {
+            if (scanf("%d", &n) == 1 && getchar() == '\n') {
+                break;
+            } else {
+                while (getchar() != '\n');
+                printf("!!! Error, enter whole number: ");
+            }
+        }
+
+        if (n < 0) {
+            printf("!!! Error, how you enter %d numbers?\n", n);
+            printf("    Number must be positive: ");
+        } else if (n == 0) {
+            printf("!!! Error, how will the program find the results if no numbers will be entered?\n");
+            printf("    Number must be positive: ");            
         }
     }
-    printf("\nNumber n=%d entered successfully.\n\n", n);
 
+
+    printf("\nNumber n=%d entered successfully.\n", n);
+    printf("Now enter %d numbers.\n\n", n);
+
+
+    // Array for nums
+    // 0 - for entered nums
+    // 1 - for [MIN , MIN+(MAX-MIN)/3]
+    // 2 - for [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
+    // 3 - for [MIN+(MAX-MIN)*2/3 , MAX]
+    double nums[n];
 
 
     // N nums entering
-    int nums[4][n];
-
-    for (int i = 0; i < n; i++) {
-        printf("Enter %d number: ", i + 1);
-        while (scanf("%d", &nums[0][i]) != 1) {
-            while (getchar() != '\n');
-            printf("Error, try again: ");
+    for (int i = 0; i < n; ++i) {
+        printf("Enter number %d: ", i + 1);
+        while (1) {
+            if (scanf("%lf", &nums[i]) == 1 && getchar() == '\n') {
+                break;
+            } else {
+                while (getchar() != '\n');
+                printf("Error, try again: ");
+            }
         }
     }
 
 
 
     // Preparing min, max
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         if (i == 0)
-            max = nums[0][i], min = nums[0][i];
+            max = min = nums[i];
         else {
-            if (max < nums[0][i])
-                max = nums[0][i];
-            else if (min > nums[0][i])
-                min = nums[0][i];
-        }
-    }
-    
-
-
-    // Preparing [MIN , MIN+(MAX-MIN)/3]
-    int nums12 = min + (max - min) / 3;
-
-    for (int i = 0; i < n; i++) {
-        if ( (min <= nums[0][i]) && (nums[0][i] <= nums12) ) {
-            nums[1][j1] = nums[0][i];
-            j1++;
+            if (max < nums[i])
+                max = nums[i];
+            else if (min > nums[i])
+                min = nums[i];
         }
     }
 
 
-
-    // Preparing [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
-    int nums21 = min + (max - min) / 3;
-    int nums22 = min + (max - min) * 2 / 3;
-
-    for (int i = 0; i < n; i++) {
-        if ( (nums21 <= nums[0][i]) && (nums[0][i] <= nums22) ) {
-            nums[2][j2] = nums[0][i];
-            j2++;
-        }
+    // Preparing Sum
+    for (int i = 0; i < n; ++i) {
+        sum += nums[i];
     }
 
 
+    // Preparing average
+    average = sum / n;
 
-    // Preparing [MIN+(MAX-MIN)*2/3 , MAX]
-    int nums31 = min + (max - min) * 2 / 3;
-
-    for (int i = 0; i < n; i++) {
-        if ( (nums31 <= nums[0][i]) && (nums[0][i] <= max) ) {
-            nums[3][j3] = nums[0][i];
-            j3++;
-        }
-    }
-
-
-
-    // Print results
-
-    printf("\n\nMin: %d    Max: %d", min, max);
-
-
-    printf("\n\n[MIN , MIN+(MAX-MIN)/3] [%d, %d]", min, min+(max-min)/3);
-    printf("\n{");
-    for (int i = 0; i < j1; i++)
-        if (i == 0)
-            printf("%d", nums[1][i]);
-        else
-            printf(", %d", nums[1][i]);
-    printf("}");
-
-
-    printf("\n\n[MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3] [%d, %d]", min+(max-min)/3, min+(max-min)*2/3);
-    printf("\n{");
-    for (int i = 0; i < j2; i++)
-    if (i == 0)
-            printf("%d", nums[2][i]);
-        else
-            printf(", %d", nums[2][i]);
-    printf("}");
-
-
-    printf("\n\n[MIN+(MAX-MIN)*2/3 , MAX] = [%d, %d]", min+(max-min)*2/3, max);
-    printf("\n{");
-    for (int i = 0; i < j3; i++)
-        if (i == 0)
-            printf("%d", nums[3][i]);
-        else
-            printf(", %d", nums[3][i]);
-    printf("}");
+    // Print Min and Max
+    printf("\n\nMin: %lf    Max: %lf", min, max);
+    printf("\nSum: %lf", sum);
+    printf("\nAverage: %lf", average);
 
     return 0;
 }

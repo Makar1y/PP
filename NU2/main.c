@@ -1,30 +1,47 @@
 #include <stdio.h>
 
 int main() {
-    int n;
+    int n = -1;
     int j1 = 0, j2 = 0, j3 = 0;
-    int max, min;
+    int max = 0, min = 0;
+
+
+
 
 
     // Entering number n
-    printf("Please enter number: ");
-    while (1) {
-        if (scanf("%d", &n) == 1 && getchar() == '\n') {
-            break;
-        } else {
-            while (getchar() != '\n');
-            printf("Error, try again: ");
+    printf("Please enter how numbers will be used: ");
+    while(n <= 0) {
+        while (1) {
+            if (scanf("%d", &n) == 1 && getchar() == '\n') {
+                break;
+            } else {
+                while (getchar() != '\n');
+                printf("!!! Error, enter whole number: ");
+            }
+        }
+
+        if (n <= 0) {
+            printf("!!! Error, number must be positive: ");
         }
     }
-    printf("\nNumber n=%d entered successfully.\n\n", n);
 
+
+    printf("\nNumber n=%d entered successfully.\n", n);
+    printf("Now enter %d numbers.\n\n", n);
+
+
+    // Array for nums
+    // 0 - for entered nums
+    // 1 - for [MIN , MIN+(MAX-MIN)/3]
+    // 2 - for [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
+    // 3 - for [MIN+(MAX-MIN)*2/3 , MAX]
+    int nums[4][n];
 
 
     // N nums entering
-    int nums[4][n];
-
     for (int i = 0; i < n; i++) {
-        printf("Enter %d number: ", i + 1);
+        printf("Enter number %d: ", i + 1);
         while (1) {
             if (scanf("%d", &nums[0][i]) == 1 && getchar() == '\n') {
                 break;
@@ -40,7 +57,7 @@ int main() {
     // Preparing min, max
     for (int i = 0; i < n; i++) {
         if (i == 0)
-            max = nums[0][i], min = nums[0][i];
+            max = min = nums[0][i];
         else {
             if (max < nums[0][i])
                 max = nums[0][i];
@@ -88,11 +105,13 @@ int main() {
 
 
 
-    // Print results
+// --------------------- Result printing
 
+    // Print Min and Max
     printf("\n\nMin: %d    Max: %d", min, max);
 
 
+    // Print [MIN , MIN+(MAX-MIN)/3]
     printf("\n\n[MIN , MIN+(MAX-MIN)/3] [%d, %d]", min, min+(max-min)/3);
     printf("\n{");
     for (int i = 0; i < j1; i++)
@@ -103,6 +122,7 @@ int main() {
     printf("}");
 
 
+    // Print [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
     printf("\n\n[MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3] [%d, %d]", min+(max-min)/3, min+(max-min)*2/3);
     printf("\n{");
     for (int i = 0; i < j2; i++)
@@ -113,6 +133,7 @@ int main() {
     printf("}");
 
 
+    // Print [MIN+(MAX-MIN)*2/3 , MAX]
     printf("\n\n[MIN+(MAX-MIN)*2/3 , MAX] = [%d, %d]", min+(max-min)*2/3, max);
     printf("\n{");
     for (int i = 0; i < j3; i++)
