@@ -1,0 +1,4 @@
+Parašyti užtruko apie 60 minučių, visaip išbandyti ir patobulinti – apie 30–60 minučių.
+
+Buvo keletas smulkių klaidų (pamiršau parašyti ; arba kopijuojant pakeisti masyvo indeksą ir pan.).
+Ju taisimas užėmė maks. 5 min.

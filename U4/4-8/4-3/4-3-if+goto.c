@@ -2,6 +2,7 @@
 
 int main() {
     int a, b, c;
+    int w_break = 0;
 
     // Welcome
     printf("Please enter 3 separated whole non negative numbers(a b c).\n");
@@ -11,26 +12,28 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
-
-        // Input
-        while (1) {
+    while1: {
+        while2: {
             if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
-                break;
+                w_break = 1;
             } else {
-                while (getchar() != '\n');
+                while3:
+                if (getchar() != '\n') goto while3;
                 printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
             }
-        };
+        }
+        if (!w_break) goto while2;
+        w_break = 0;
 
         // Validation
         if ( (a >= 0) && (b >= 0) && (c >= 0) ) {
-            break;
+            w_break = 1;
         } else {
             printf("\nError, all numbers must be non negative!\n\n");
             printf("Please enter 3 correct numbers: ");
         }
     }
+    if (!w_break) goto while1;
     
 
 
@@ -39,11 +42,12 @@ int main() {
     int f[c+1];
     f[0] = a; f[1] = b;
 
-
-    for (int i = 2; i <= c; ++i) {
+    int i = 2;
+    for1: {
         f[i] = f[i-1] + f[i-2];
+        ++i;
     }
-
+    if (i <= c) goto for1;
 
     // for (int i = 0; i <= c; ++i) {
     //     printf("\nF(%d) = %d", i, f[i]);

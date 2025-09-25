@@ -39,7 +39,8 @@ int main() {
     // Printing results
     printf("\n\nResult:\n");
     printf("{");
-    for (int i = 1, j = 0; a + i <= b; ++i) {
+    int i = 1, j = 0;
+    while (a + i <= b) {
         if ( ((i + a) % c == module) && (i + a >=0) ) {
             if (j == 0)
                 printf("%d", a + i);
@@ -47,6 +48,7 @@ int main() {
                 printf(", %d", a + i);
             ++j;
         }
+        ++i;
     }
     printf("}");
 

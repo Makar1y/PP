@@ -11,7 +11,7 @@ int LCM(int a, int b, int c) {
         printf("\nc = 0, cant find LCM"); return 0;
     }
 
-    while (1)
+    for (; 1;)
     {
         if(an > bn)
             bn += b;
@@ -37,13 +37,13 @@ int GCD(int a, int b, int c) {
     int i;
 
     // Euclidean algorithm
-    while (b != 0) {
+    for (; b != 0;) {
         i = b;
         b = a % b;
         a = i;
     }
 
-    while (c != 0) {
+    for (; c != 0;) {
         i = c;
         c = a % c;
         a = i;
@@ -63,7 +63,7 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
+    for (; 1;) {
         if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
             if (a >= 0 && b >= 0 && c >= 0)
                 break;
@@ -71,10 +71,10 @@ int main() {
                 printf("Error, please enter 3 natural numbers: ");
             }
         } else {
-            while (getchar() != '\n');
+            for (; getchar() != '\n';);
             printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
         }
-    }
+    };
 
     
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);

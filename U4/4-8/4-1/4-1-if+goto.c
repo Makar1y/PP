@@ -3,6 +3,7 @@
 
 int main() {
     int a, b, c;
+    int i = 0;
     double discriminant, x1, x2;
 
     printf("Please enter 3 separated numbers(a b c).\n");
@@ -11,14 +12,15 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
-        if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
-            break;
-        } else {
-            while (getchar() != '\n');
-            printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
-        }
-    };
+    while1:
+    if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
+        i = 1;
+    } else {
+        while2:
+        if (getchar() != '\n') goto while2;
+        printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
+    }
+    if ( !i ) goto while1;
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);
 
 

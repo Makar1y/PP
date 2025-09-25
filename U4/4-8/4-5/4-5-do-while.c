@@ -2,6 +2,7 @@
 
 int main() {
     int n = 0;
+    int i = 0;
     double max = 0, min = 0, sum = 0, average = 0;
 
 
@@ -11,15 +12,15 @@ int main() {
 
     // Entering number n
     printf("Please enter number n: ");
-    while(n <= 0) {
-        while (1) {
+    do {
+        do {
             if (scanf("%d", &n) == 1 && getchar() == '\n') {
                 break;
             } else {
-                while (getchar() != '\n');
+                do ; while (getchar() != '\n');
                 printf("!!! Error, enter whole number: ");
             }
-        }
+        } while (1);
 
         if (n < 0) {
             printf("!!! Error, how you enter %d numbers?\n", n);
@@ -28,7 +29,7 @@ int main() {
             printf("!!! Error, how will the program find the results if no numbers will be entered?\n");
             printf("    Number must be positive: ");            
         }
-    }
+    } while(n <= 0);
 
 
     printf("\nNumber n=%d entered successfully.\n", n);
@@ -44,22 +45,24 @@ int main() {
 
 
     // N nums entering
-    for (int i = 0; i < n; ++i) {
+    do {
         printf("Enter number %d: ", i + 1);
-        while (1) {
+        do {
             if (scanf("%lf", &nums[i]) == 1 && getchar() == '\n') {
                 break;
             } else {
-                while (getchar() != '\n');
+                do ; while (getchar() != '\n');
                 printf("Error, try again: ");
             }
-        }
-    }
+        } while (1);
+        ++i;
+    } while (i < n);
 
 
 
     // Preparing min, max
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    do {
         if (i == 0)
             max = min = nums[i];
         else {
@@ -68,13 +71,16 @@ int main() {
             else if (min > nums[i])
                 min = nums[i];
         }
-    }
+        ++i;
+    } while(i < n);
 
 
     // Preparing Sum
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    do {
         sum += nums[i];
-    }
+        ++i;
+    } while( i < n);
 
 
     // Preparing average

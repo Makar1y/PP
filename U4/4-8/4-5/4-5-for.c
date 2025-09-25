@@ -11,12 +11,12 @@ int main() {
 
     // Entering number n
     printf("Please enter number n: ");
-    while(n <= 0) {
-        while (1) {
+    for (; n <= 0; ) {
+        for (; 1;) {
             if (scanf("%d", &n) == 1 && getchar() == '\n') {
                 break;
             } else {
-                while (getchar() != '\n');
+                for (; getchar() != '\n';);
                 printf("!!! Error, enter whole number: ");
             }
         }
@@ -50,7 +50,7 @@ int main() {
             if (scanf("%lf", &nums[i]) == 1 && getchar() == '\n') {
                 break;
             } else {
-                while (getchar() != '\n');
+                for (; getchar() != '\n';);
                 printf("Error, try again: ");
             }
         }

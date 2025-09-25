@@ -2,6 +2,7 @@
 
 int main() {
     int n = 0;
+    int w_break = 0, i;
     double max = 0, min = 0, sum = 0, average = 0;
 
 
@@ -11,15 +12,16 @@ int main() {
 
     // Entering number n
     printf("Please enter number n: ");
-    while(n <= 0) {
-        while (1) {
+    while1: {
+        while2: {
             if (scanf("%d", &n) == 1 && getchar() == '\n') {
-                break;
+                w_break = 1;
             } else {
-                while (getchar() != '\n');
+                while3:
+                if (getchar() != '\n') goto while3;
                 printf("!!! Error, enter whole number: ");
             }
-        }
+        } if (!w_break) goto while2; w_break = 0;
 
         if (n < 0) {
             printf("!!! Error, how you enter %d numbers?\n", n);
@@ -28,7 +30,7 @@ int main() {
             printf("!!! Error, how will the program find the results if no numbers will be entered?\n");
             printf("    Number must be positive: ");            
         }
-    }
+    } if (n <= 0) goto while1; w_break = 0;
 
 
     printf("\nNumber n=%d entered successfully.\n", n);
@@ -44,22 +46,26 @@ int main() {
 
 
     // N nums entering
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    for1: {
         printf("Enter number %d: ", i + 1);
-        while (1) {
+        while4: {
             if (scanf("%lf", &nums[i]) == 1 && getchar() == '\n') {
-                break;
+                w_break = 1;
             } else {
-                while (getchar() != '\n');
+                while5:
+                if (getchar() != '\n') goto while5;
                 printf("Error, try again: ");
             }
-        }
-    }
+        } if (!w_break) goto while4; w_break = 0;
+        ++i;
+    } if (i < n) goto for1;
 
 
 
     // Preparing min, max
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    for2: {
         if (i == 0)
             max = min = nums[i];
         else {
@@ -68,13 +74,16 @@ int main() {
             else if (min > nums[i])
                 min = nums[i];
         }
-    }
+        ++i;
+    } if (i < n) goto for2;
 
 
     // Preparing Sum
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    for3: {
         sum += nums[i];
-    }
+        ++i;
+    } if (i < n) goto for3;
 
 
     // Preparing average

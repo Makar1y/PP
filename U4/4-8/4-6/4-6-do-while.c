@@ -3,11 +3,11 @@
 int get_digits(int num) {
     int digits = 1;
 
-    while (num) {
+    do {
         if ((num /= 10) > 0){
             ++digits;
         }
-    }
+    } while (num);
     return digits;
 }
 
@@ -23,23 +23,23 @@ int main() {
 
 
     // Entering numbers
-    while (num > 0) {
+    do {
         printf("Please enter number: ");
-        while(1) {
+        do {
             if (scanf("%d", &num) == 1 && getchar() == '\n')
                 break;
             else {
-                while (getchar() != '\n');
+                do ; while (getchar() != '\n');
                 printf("!!! Error, please enter whole number: ");
             }
-        }
+        } while(1);
 
         digits = get_digits(num);
         if (digits > result_number_digits || result_number < num){
             result_number = num;
             result_number_digits = digits;
         }
-    }
+    } while (num > 0);
 
 
     printf("\nLargest number with maximum digits: %d\n", result_number);

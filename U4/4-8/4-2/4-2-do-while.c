@@ -10,14 +10,14 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
+    do {
         if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
             break;
         } else {
-            while (getchar() != '\n');
+            do; while (getchar() != '\n');
             printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
         }
-    };
+    } while (1);
 
     // Errors handling
     if (c == 0) {
@@ -39,7 +39,8 @@ int main() {
     // Printing results
     printf("\n\nResult:\n");
     printf("{");
-    for (int i = 1, j = 0; a + i <= b; ++i) {
+    int i = 1, j = 0;
+    do {
         if ( ((i + a) % c == module) && (i + a >=0) ) {
             if (j == 0)
                 printf("%d", a + i);
@@ -47,7 +48,9 @@ int main() {
                 printf(", %d", a + i);
             ++j;
         }
-    }
+        ++i;
+    } while (a + i <= b);
+    
     printf("}");
 
     return 0;

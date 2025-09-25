@@ -39,9 +39,10 @@ int main() {
     int f[c+1];
     f[0] = a; f[1] = b;
 
-
-    for (int i = 2; i <= c; ++i) {
+    int i = 2;
+    while ( i <= c ) {
         f[i] = f[i-1] + f[i-2];
+        ++i;
     }
 
 

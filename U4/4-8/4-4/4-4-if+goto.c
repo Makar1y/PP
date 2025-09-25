@@ -11,7 +11,7 @@ int LCM(int a, int b, int c) {
         printf("\nc = 0, cant find LCM"); return 0;
     }
 
-    while (1)
+    lcm_while:
     {
         if(an > bn)
             bn += b;
@@ -30,24 +30,24 @@ int LCM(int a, int b, int c) {
 
         if (an == bn && bn == cn && an == cn)
             return an;
-    }
+    } if (1) goto lcm_while;
 }
 
 int GCD(int a, int b, int c) {
     int i;
 
     // Euclidean algorithm
-    while (b != 0) {
+    gcd_while1: {
         i = b;
         b = a % b;
         a = i;
-    }
+    } if (b != 0) goto gcd_while1;
 
-    while (c != 0) {
+    gcd_while2: {
         i = c;
         c = a % c;
         a = i;
-    }
+    } if (c != 0) goto gcd_while2;
 
     return a;
 }
@@ -55,6 +55,7 @@ int GCD(int a, int b, int c) {
 
 int main() {
     int a, b, c;
+    int w_break = 0;
 
     // Welcome
     printf("Please enter 3 separated whole natural numbers(a b c).\n");
@@ -63,18 +64,19 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
+    while1: {
         if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
             if (a >= 0 && b >= 0 && c >= 0)
-                break;
+                w_break = 1;
             else {
                 printf("Error, please enter 3 natural numbers: ");
             }
         } else {
-            while (getchar() != '\n');
+            while2: 
+            if (getchar() != '\n') goto while2;
             printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
         }
-    }
+    } if (!w_break) goto while1;
 
     
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);

@@ -74,7 +74,7 @@ int main() {
             while (getchar() != '\n');
             printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
         }
-    }
+    };
 
     
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);

@@ -1,12 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    int n = -1;
+    int n = 0;
     int j1 = 0, j2 = 0, j3 = 0;
     int max = 0, min = 0;
-
-
-
 
 
     // Entering number n
@@ -33,9 +30,9 @@ int main() {
 
     // Array for nums
     // 0 - for entered nums
-    // 1 - for [MIN , MIN+(MAX-MIN)/3]
-    // 2 - for [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
-    // 3 - for [MIN+(MAX-MIN)*2/3 , MAX]
+    // 1 - for [MIN , MIN+(MAX-MIN)/3] nums
+    // 2 - for [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3] nums
+    // 3 - for [MIN+(MAX-MIN)*2/3 , MAX] nums
     int nums[4][n];
 
 
@@ -69,6 +66,9 @@ int main() {
 
 
     // Preparing [MIN , MIN+(MAX-MIN)/3]
+    //                       |
+    //     ------------------
+    //    |
     int nums12 = min + (max - min) / 3;
 
     for (int i = 0; i < n; i++) {
@@ -81,8 +81,11 @@ int main() {
 
 
     // Preparing [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
-    int nums21 = min + (max - min) / 3;
-    int nums22 = min + (max - min) * 2 / 3;
+    //                 |                        |
+    //     ------------                         |
+    //    |                                     |
+    int nums21 = min + (max - min) / 3; //      |
+    int nums22 = min + (max - min) * 2 / 3; // -|
 
     for (int i = 0; i < n; i++) {
         if ( (nums21 <= nums[0][i]) && (nums[0][i] <= nums22) ) {
@@ -94,6 +97,9 @@ int main() {
 
 
     // Preparing [MIN+(MAX-MIN)*2/3 , MAX]
+    //                 |
+    //     ------------
+    //    |
     int nums31 = min + (max - min) * 2 / 3;
 
     for (int i = 0; i < n; i++) {

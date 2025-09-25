@@ -3,7 +3,7 @@
 int get_digits(int num) {
     int digits = 1;
 
-    while (num) {
+    for (; num ;) {
         if ((num /= 10) > 0){
             ++digits;
         }
@@ -23,13 +23,13 @@ int main() {
 
 
     // Entering numbers
-    while (num > 0) {
+    for (; num > 0 ;) {
         printf("Please enter number: ");
-        while(1) {
+        for(; 1 ;) {
             if (scanf("%d", &num) == 1 && getchar() == '\n')
                 break;
             else {
-                while (getchar() != '\n');
+                for (; getchar() != '\n' ;);
                 printf("!!! Error, please enter whole number: ");
             }
         }

@@ -2,6 +2,7 @@
 
 int main() {
     int a, b, c, module;
+    int w_break = 0;
 
     // Welcome
     printf("Please enter 3 separated numbers(a b c).\n");
@@ -10,14 +11,15 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
-        if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
-            break;
-        } else {
-            while (getchar() != '\n');
-            printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
-        }
-    };
+    while1:
+    if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
+        w_break++;
+    } else {
+        while2:
+        if (getchar() != '\n') goto while2;
+        printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
+    }
+    if ( !w_break ) goto while1;
 
     // Errors handling
     if (c == 0) {
@@ -39,15 +41,17 @@ int main() {
     // Printing results
     printf("\n\nResult:\n");
     printf("{");
-    for (int i = 1, j = 0; a + i <= b; ++i) {
-        if ( ((i + a) % c == module) && (i + a >=0) ) {
-            if (j == 0)
-                printf("%d", a + i);
-            else
-                printf(", %d", a + i);
-            ++j;
-        }
+    int i = 1, j = 0;
+    for1:
+    if ( ((i + a) % c == module) && (i + a >=0) ) {
+        if (j == 0)
+            printf("%d", a + i);
+        else
+            printf(", %d", a + i);
+        ++j;
     }
+    ++i;
+    if (a + i <= b) goto for1;
     printf("}");
 
     return 0;

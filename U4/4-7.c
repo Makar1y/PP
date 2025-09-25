@@ -5,11 +5,13 @@ int main() {
     short last_s = 0;
     int last_i = 0;
     long last_l = 0;
+    // long long last_ll = 0;
 
     unsigned char last_cu = 0;
     unsigned short last_su = 0;
     unsigned int last_iu = 0;
     unsigned long last_lu = 0;
+    // unsigned long long last_llu = 0;
 
     // s - signed
     // u - unsigned
@@ -31,8 +33,14 @@ int main() {
     signed long long_s = 1;
     unsigned long long_u = 1;
 
+    // C99
+    // Miner mode)
+    // long long llong_d = 1;
+    // signed long long llong_s = 1;
+    // unsigned long long llong_u = 1;
 
-    printf("C language bounds for whole numbers data types:\n");
+
+    printf("C language whole numbers data types bounds:\n");
 
 // --------------------------------------------- chars
 
@@ -81,7 +89,6 @@ int main() {
 
 // --------------------------------------------- ints
 
-    last_i = 0;
     while (int_d > last_i) {
         last_i = int_d;
         ++int_d;
@@ -104,7 +111,6 @@ int main() {
 
     // ------------------------------------------------- longs
 
-    last_l = 0;
     while (long_d > last_l) {
         last_l = long_d;
         ++long_d;
@@ -123,6 +129,28 @@ int main() {
         ++long_u;
     }
     printf("\nUnsigned long bounds [%lu, %lu]\n", long_u, last_lu);
+
+
+    // ------------------------------------------------- long longs
+
+    // while (llong_d > last_ll) {
+    //     last_ll = llong_d;
+    //     llong_d++;
+    // }
+    // printf("\nDefault long bounds [%ld, %ld]", llong_d, last_ll);
+
+    // last_ll = 0;
+    // while (llong_s > last_ll) {
+    //     last_ll = llong_s;
+    //     ++llong_s;
+    // }
+    // printf("\nSigned long bounds [%ld, %ld]", llong_s, last_ll);
+
+    // while (llong_u > last_llu) {
+    //     last_llu = llong_u;
+    //     ++llong_u;
+    // }
+    // printf("\nUnsigned long bounds [%lu, %lu]\n", llong_u, last_llu);
 
 
     return 0;

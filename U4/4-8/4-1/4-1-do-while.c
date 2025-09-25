@@ -11,14 +11,14 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
+    do {
         if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
             break;
         } else {
-            while (getchar() != '\n');
+            do ; while (getchar() != '\n');
             printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
         }
-    };
+    } while (1);
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);
 
 

@@ -11,17 +11,17 @@ int main() {
 
     // Input
     printf("Please enter 3 whole numbers: ");
-    while (1) {
+    do {
 
         // Input
-        while (1) {
+        do {
             if ((scanf("%d %d %d", &a, &b, &c) == 3) && (getchar() == '\n')){
                 break;
             } else {
-                while (getchar() != '\n');
+                do ; while (getchar() != '\n');
                 printf("Error, please enter 3 whole numbers, like that - 'a b c'\n: ");
             }
-        };
+        } while (1);
 
         // Validation
         if ( (a >= 0) && (b >= 0) && (c >= 0) ) {
@@ -30,7 +30,8 @@ int main() {
             printf("\nError, all numbers must be non negative!\n\n");
             printf("Please enter 3 correct numbers: ");
         }
-    }
+    } while (1);
+    
     
 
 
@@ -39,10 +40,12 @@ int main() {
     int f[c+1];
     f[0] = a; f[1] = b;
 
-
-    for (int i = 2; i <= c; ++i) {
+    int i = 2;
+    do {
         f[i] = f[i-1] + f[i-2];
-    }
+        ++i;
+    } while (i <= c);
+    
 
 
     // for (int i = 0; i <= c; ++i) {

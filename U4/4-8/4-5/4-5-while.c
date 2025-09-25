@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int n = 0;
+    int n = 0, i;
     double max = 0, min = 0, sum = 0, average = 0;
 
 
@@ -44,7 +44,8 @@ int main() {
 
 
     // N nums entering
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    while (i < n) {
         printf("Enter number %d: ", i + 1);
         while (1) {
             if (scanf("%lf", &nums[i]) == 1 && getchar() == '\n') {
@@ -54,12 +55,14 @@ int main() {
                 printf("Error, try again: ");
             }
         }
+        ++i;
     }
 
 
 
     // Preparing min, max
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    while (i < n) {
         if (i == 0)
             max = min = nums[i];
         else {
@@ -68,12 +71,15 @@ int main() {
             else if (min > nums[i])
                 min = nums[i];
         }
+        ++i;
     }
 
 
     // Preparing Sum
-    for (int i = 0; i < n; ++i) {
+    i = 0;
+    while (i < n) {
         sum += nums[i];
+        ++i;
     }
 
 
