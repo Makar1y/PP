@@ -41,7 +41,15 @@ int main() {
     printf("{");
     int i = 1, j = 0;
     do {
-        if ( ((i + a) % c == module) && (i + a >=0) ) {
+        // Sign correction
+        if (i + a < 0) {
+            module = -1;
+        } else {
+            module = 1;
+        }
+
+        if ( ((i + a) % c == module) ) {
+            
             if (j == 0)
                 printf("%d", a + i);
             else

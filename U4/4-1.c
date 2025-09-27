@@ -20,6 +20,16 @@ int main() {
         }
     };
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);
+    if (a == 0 && b != 0) {
+        x1 = -c/b;
+        printf("\n\nResult:");
+        printf("\nx = %lf", x1);
+        return 0;
+    } else if (a == 0 && b == 0) {
+        printf("\n\nResult:");
+        printf("\nx = R(real number)");
+        return 0;
+    }
 
 
     // Discriminant calculation
@@ -38,7 +48,7 @@ int main() {
 
     // One result
     } else if (discriminant == 0) {
-        x1 = ( -b + sqrt(discriminant) ) / (2 * a);
+        x1 = ( -b + 0) / (2 * a);
 
         printf("\nThere are one result for quadratic equation with these numbers:\n");
         printf("x = %lf", x1);

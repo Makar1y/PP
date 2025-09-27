@@ -33,8 +33,6 @@ int main() {
     signed long long_s = 1;
     unsigned long long_u = 1;
 
-    // C99
-    // Miner mode)
     // long long llong_d = 1;
     // signed long long llong_s = 1;
     // unsigned long long llong_u = 1;

@@ -31,25 +31,26 @@ int main() {
 
 
 
-    // Sign correction
-    if (c < 0) {
-        module = -1;
-    } else {
-        module = 1;
-    }
-
     // Printing results
     printf("\n\nResult:\n");
     printf("{");
     int i = 1, j = 0;
     for1:
-    if ( ((i + a) % c == module) && (i + a >=0) ) {
-        if (j == 0)
-            printf("%d", a + i);
-        else
-            printf(", %d", a + i);
-        ++j;
-    }
+        // Sign correction
+        if (i + a < 0) {
+            module = -1;
+        } else {
+            module = 1;
+        }
+
+        if ( ((i + a) % c == module) ) {
+
+            if (j == 0)
+                printf("%d", a + i);
+            else
+                printf(", %d", a + i);
+            ++j;
+        }
     ++i;
     if (a + i <= b) goto for1;
     printf("}");

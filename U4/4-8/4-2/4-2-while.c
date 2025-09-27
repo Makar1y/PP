@@ -29,19 +29,19 @@ int main() {
 
 
 
-    // Sign correction
-    if (c < 0) {
-        module = -1;
-    } else {
-        module = 1;
-    }
-
     // Printing results
     printf("\n\nResult:\n");
     printf("{");
     int i = 1, j = 0;
     while (a + i <= b) {
-        if ( ((i + a) % c == module) && (i + a >=0) ) {
+        // Sign correction
+        if (i + a < 0) {
+            module = -1;
+        } else {
+            module = 1;
+        }
+
+        if ( ((i + a) % c == module)) {
             if (j == 0)
                 printf("%d", a + i);
             else

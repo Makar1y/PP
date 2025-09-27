@@ -38,12 +38,18 @@ int GCD(int a, int b, int c) {
 
     // Euclidean algorithm
     do {
+        if (b == 0) {
+            break;
+        }
         i = b;
         b = a % b;
         a = i;
     } while (b != 0);
 
     do {
+        if ( c == 0 ) {
+            break;
+        }
         i = c;
         c = a % c;
         a = i;

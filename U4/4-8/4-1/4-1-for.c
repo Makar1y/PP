@@ -21,6 +21,18 @@ int main() {
     };
     printf("\nNumbers entered successfully(a = %d, b = %d, c = %d).", a, b, c);
 
+    
+    if (a == 0 && b != 0) {
+        x1 = -c/b;
+        printf("\n\nResult:");
+        printf("\nx = %lf", x1);
+        return 0;
+    } else if (a == 0 && b == 0) {
+        printf("\n\nResult:");
+        printf("\nx = R(real number)");
+        return 0;
+    }
+
 
     // Discriminant calculation
     discriminant = (b * b) - (4 * a * c);

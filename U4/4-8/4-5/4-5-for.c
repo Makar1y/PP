@@ -35,11 +35,7 @@ int main() {
     printf("Now enter %d numbers.\n\n", n);
 
 
-    // Array for nums
-    // 0 - for entered nums
-    // 1 - for [MIN , MIN+(MAX-MIN)/3]
-    // 2 - for [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
-    // 3 - for [MIN+(MAX-MIN)*2/3 , MAX]
+    // Array for entered nums
     double nums[n];
 
 
