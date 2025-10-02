@@ -2,7 +2,7 @@
 
 #define MAX_SIZE 1000
 
-// check to avoid duplications
+// Check to avoid duplications.  // May be not print some results?
 int check_answer(int *answer_array, int *temp_array, int nums, int size) {
     int result_sum = 0; // Unique sum ?
     for (int i = 0; i < nums; ++i) {
