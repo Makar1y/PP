@@ -129,7 +129,7 @@ int main() {
     find(0, 0, 0, size, array, temp_array, x, answer_array, &found);
 
     if (!found) {
-       printf("Program not found needed numbers in array to ")
+       printf("Program not found needed numbers in array to collect needed sum.\n");
     }
 
     return 0;
