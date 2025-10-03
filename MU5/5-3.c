@@ -26,7 +26,13 @@ int main() {
         }
     }
 
+    if (n < 0) {
+        printf("!!! Error, overflowed size less than 0\n");
+        return 1;
+    }
+
     double array[n];
+
 
     //  Num entering
     for (int i = 0; i < n; ++i) {

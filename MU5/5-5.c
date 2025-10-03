@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 
-int clear_array(int *array) {
+void clear_array(int *array) {
     for (int i = 0; i < 10; ++i) {
         array[i] = 0;
     }
@@ -70,6 +70,9 @@ int main() {
 
 
 
+    if (x == 0) {
+        ++x_digits_frequency[0];
+    }
 
     x_copy = x;
     while (x_copy)
@@ -103,9 +106,9 @@ int main() {
 
     // result printing
     if (cant) {
-        printf("\nFrom number %d digits cant get all these numbers:\n", x);
+        printf("\nFrom number %ld digits !! can't !! get all these numbers:\n", x);
     } else {
-        printf("From number %d digits can get all these numbers:\n", x);
+        printf("From number %ld digits !! can !! get all these numbers:\n", x);
     }
 
     printf("{");

@@ -38,7 +38,8 @@ int main() {
     // 5
     for (int i = size - 1; i > 6; --i) {
         array[i + 1] = array[i];
-    } array[6] = 4;
+    } 
+    array[6] = 4;
 
     ++size;
 
@@ -165,7 +166,7 @@ int main() {
 
     array[index] = value;
     printf("Changes applied.\n");
-    printf("Now array have 9 elements.\n\n0");
+    printf("Now array have 9 elements.\n\n");
 
     
     // 10
