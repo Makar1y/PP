@@ -32,6 +32,7 @@ int main() {
     }
 
     // Result printing
+    printf("%u", factorial);
     if (factorial > input) {
         printf("\n!%d = %u\n", input, factorial);
     } else {

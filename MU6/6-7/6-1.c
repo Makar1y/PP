@@ -1,14 +1,23 @@
 #include <stdio.h>
 
+#define error_nums 5
+
+int input_errors = error_nums;
+
 int main() {
     int input;
     char last_char;
     unsigned factorial = 1;
+    
 
     printf("Entre number and program will calculate factorial and also save result ot file out.txt.\n");
 
     // Input
     while (1) {
+        if (input_errors <= 0) {
+            printf("!!! Exit program(0 tries left)");
+            return 1;
+        }
         printf(": ");
         if ( (scanf("%d%c", &input, &last_char) == 2) && (last_char == '\n') ) {
             if (input > 0) {
@@ -16,6 +25,8 @@ int main() {
                 break;
             } else { 
                 printf("!!! Error, number must be positive.\n");
+                --input_errors;
+                printf("!!! Tries left: %d\n", input_errors);
             }
             
         } else {
@@ -23,6 +34,8 @@ int main() {
                 scanf("%c", &last_char);
             }
             printf("!!! Error, please enter whole number.\n");
+            --input_errors;
+            printf("!!! Tries left: %d\n", input_errors);
         }
     }
 
