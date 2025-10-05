@@ -2,10 +2,13 @@
 #include <string.h>
 
 #define BUFFER 100
+#define TRIES 5
+
+int tries = TRIES;
 
 
 int valid_date(int year, int month, int day) {
-    if (year < 1 || (month < 1 || month > 12) || day < 1) {
+    if (year < 0 || (month < 1 || month > 12) || day < 1) {
         return 0;
     }
 
@@ -50,11 +53,15 @@ int main() {
     int q, k, j, m;
 
     printf("Please enter date in format \"YYYY-MM-DD\"\n");
-    printf("And program will print day of week.\n\n");
+    printf("And program will print day of week(Ensure that week.txt contain 7 lines with names of the days).\n\n");
     printf("Please enter date: ");
 
     while (2) {
-        if (scanf("%4[0-9]-%2[0-9]-%2[0-9]", year_s, month_s, day_s) == 3 && getchar() == '\n') {
+        if (tries <= 0) {
+            printf("\n\nProgram exit(0 tries left).\n");
+            return 1;
+        }
+        if (scanf("%4[0-9^\n]-%2[0-9^\n]-%2[0-9]", year_s, month_s, day_s) == 3 && getchar() == '\n') {
             if ( (strlen(year_s) == 4) && (strlen(month_s) == 2) && (strlen(day_s) == 2) ) {
                 sscanf(year_s, "%d", &year);
                 sscanf(month_s, "%d", &month);
@@ -63,14 +70,18 @@ int main() {
                 if (valid_date(year, month, day)) {
                     break;
                 } else {
-                    printf("!!! Error, enter valid date: ");
+                    --tries;
+                    printf("!!! Error(%d tries left), enter valid date: ", tries);
                 }
             } else {
-                printf("!!! Error, enter valid date: ");
+                --tries;
+                printf("!!! Error(%d tries left), enter valid date: ", tries);
             }
         } else {
             while(getchar() != '\n');
-            printf("!!! Error, enter date in specified format: ");
+
+            --tries;
+            printf("!!! Error(%d tries left), enter date in specified format: ", tries);
         }
     }
     printf("Data %4.4d-%2.2d-%2.2d entered successfully.\n\n", year, month, day);
@@ -89,8 +100,8 @@ int main() {
     k = year % 100;
     j = year / 100;
 
-    day_of_week = (q + ((13 * (m + 1)) / 5 ) + k + (k / 4) + (j / 4) - 2 * j) % 7;
-    day_of_week = ((day_of_week + 5) % 7) + 1; 
+    day_of_week = (q + ((13 * (m + 1)) / 5 ) + k + (k / 4) + (j / 4) - 2 * j) % 7; // day of week
+    day_of_week = ((day_of_week + 5) % 7) + 1; // convert to human comfort format
 
 
 
@@ -109,7 +120,7 @@ int main() {
 
         if (!file_correct) {
             printf("!!! Error parsing week.txt file.\n");
-            printf("!!! Printing number value.\n");
+            printf("!!! Printing day number.\n");
             printf("!!! Day of week: %d\n", day_of_week);
         }
 

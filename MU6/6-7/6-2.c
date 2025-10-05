@@ -2,6 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define TRIES 5
+
+int invalid_inputs_left = TRIES;
+
 int is_valid_number(char *s, double *value) {
     char *endptr;
     char buf[64];
@@ -53,16 +57,25 @@ int main() {
     printf("\n");
 
     while (1) {
+        if (invalid_inputs_left <= 0) {
+            printf("Program exit(0 tries left)");
+            return 1;
+        }
         FILE *f = fopen(file_name, "r");
         if (f == NULL) {
-            printf("Could not open file. Enter another file name: ");
+            --invalid_inputs_left;
+            printf("!!! (Tries left: %d) Error, %s", invalid_inputs_left, file_name);
+            perror("->");
+            printf("Enter another file name: ");
             scanf("%63s", file_name);
             continue;
         }
 
         if (!fgets(number, sizeof(number), f)) {
             fclose(f);
-            printf("File is empty. Enter another file name: ");
+            --invalid_inputs_left;
+            printf("File is empty, (%d tries left).\n", invalid_inputs_left);
+            printf("Enter another file name: ");
             scanf("%63s", file_name);
             continue;
         }
@@ -78,7 +91,9 @@ int main() {
             printf("Number length: %lu\n", length);
             break;
         } else {
-            printf("Invalid data. Enter another file name: ");
+            --invalid_inputs_left;
+            printf("Invalid data, (%d tries left).\n", invalid_inputs_left);
+            printf("Enter another file name: ");
             scanf("%63s", file_name);
         }
     }

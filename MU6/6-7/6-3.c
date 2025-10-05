@@ -2,6 +2,9 @@
 #include <string.h>
 
 #define NUM_SIZE 100
+#define TRIES 5
+
+int tries = TRIES;
 
 int main() {
     long a, b, c;
@@ -21,9 +24,16 @@ int main() {
             break;
         } else {
             while(getchar() != '\n');
-            printf("!!! Error, please enter numbers in specified format.\n");
+            --tries;
+            printf("!!! Error, please enter numbers in specified format(%d tries left).\n", tries);
         }
-    }
+
+        if (tries <= 0) {
+            printf("Program exit(0 tries left).\n");
+            return 1;
+        }
+    } tries = TRIES;
+
 
     if ((a >= b && a <= c) || (a <= b && a >= c)) {
         middle = a;
@@ -40,7 +50,7 @@ int main() {
             scanf("%s", filename);
 
             if (strcmp(filename, "exit") == 0) {
-                printf("Program exited.");
+                printf("Program exit(user exit).");
                 return 0;
             }
 
@@ -48,13 +58,19 @@ int main() {
             if (len > 4 && strcmp(filename + len - 4, ".txt") == 0) {
                 break;
             } else {
-                printf("!!! Error, file extension should be .txt\n");
+                --tries;
+                printf("!!! Error(%d tries left), file extension should be .txt\n", tries);
+            }
+
+            if (tries <= 0) {
+                printf("Program exit(0 tries left).\n");
+                return 1;
             }
         }
 
 
 
-        FILE *f = fopen(filename, "w");
+        FILE *f = fopen(filename, "a");
         if (f != NULL) {
             fprintf(f, "%d\n", middle);
             printf("Result saved to \"%s\".\n", filename);
@@ -62,8 +78,16 @@ int main() {
             fclose(f);
             break;
         } else {
-            printf("!!! Error, could not open file.\n");
-            printf("Try enter new file name, or type exit to terminate program.");
+            --tries;
+            printf("!!! Error(%d tries left), could not open file.\n", tries);
+            if (tries > 0) {
+                printf("Try enter new file name, or type exit to terminate program.");
+            }
+        }
+
+        if (tries <= 0) {
+            printf("Program exit(0 tries left).\n");
+            return 1;
         }
     }
 

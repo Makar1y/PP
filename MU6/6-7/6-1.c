@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#define error_nums 5
+#define ERROR_NUMS 5
 
-int input_errors = error_nums;
+int input_errors = ERROR_NUMS;
 
 int main() {
     int input;

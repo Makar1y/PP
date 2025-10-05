@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#define TRIES 5
+
+int tries = TRIES;
+
+
 int valid(char *array) {
 
     for (int i = 0; i < sizeof array && array[i] != '\0'; ++i) {
@@ -19,7 +24,12 @@ int main() {
     printf(": ");
 
     while (1) {
-        if ( (scanf("%100[^@]@%100[^@.].%100[^@\n]", before, between, after) == 3) && (getchar() == '\n') ) {
+        if ( tries <= 0) {
+            printf("Program exit(0 tries left).");
+            return 1;
+        }
+
+        if ( (scanf("%100[^@\n]@%100[^@.\n].%100[^@\n]", before, between, after) == 3) && (getchar() == '\n') ) {
             if (valid(before) && valid(between) && valid(after)) {
                 printf("Email entered successfully.\n");
                 printf("Email domain: %s.%s\n", between, after);
@@ -33,16 +43,23 @@ int main() {
                     fclose(emails);
                     printf("Email saved to emails.txt\n");
                     printf("\nEnter next email(press ctrl+c to exit): ");
+                    tries = TRIES;
                 } else {
-                    perror("!!! Error, emails.txt");
+                    --tries;
+                    printf("!!! Error(%d tries left), ", tries);
+                    perror("emails.txt");
                 }
             } else {
-                printf("Invalid email, there must be at least one symbol before, after and between @ and . symbols.\n");
-                printf("Enter correct email: ");
+                --tries;
+                printf("Invalid email(%d tries left), there must be at least one symbol before, after and between @ and . symbols.\n", tries);
+                if (tries) {
+                    printf("Enter correct email: ");
+                }
             }
         } else {
             while (getchar() != '\n');
-            printf("!!! Error, enter valid email: ");
+            --tries;
+            printf("!!! Error(%d tries left), enter valid email: ", tries);
         }
     }
 

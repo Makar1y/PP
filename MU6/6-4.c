@@ -50,11 +50,11 @@ int main() {
     int q, k, j, m;
 
     printf("Please enter date in format \"YYYY-MM-DD\"\n");
-    printf("And program will print day of week.\n\n");
+    printf("And program will print day of week(Ensure that week.txt contain 7 lines with names of the days).\n\n");
     printf("Please enter date: ");
 
     while (2) {
-        if (scanf("%4[0-9]-%2[0-9]-%2[0-9]", year_s, month_s, day_s) == 3 && getchar() == '\n') {
+        if (scanf("%4[0-9^\n]-%2[0-9^\n]-%2[0-9]", year_s, month_s, day_s) == 3 && getchar() == '\n') {
             if ( (strlen(year_s) == 4) && (strlen(month_s) == 2) && (strlen(day_s) == 2) ) {
                 sscanf(year_s, "%d", &year);
                 sscanf(month_s, "%d", &month);

@@ -2,10 +2,16 @@
 
 int main() {
     int n = 0;
-    int j1 = 0, j2 = 0, j3 = 0;
+    int count_1 = 0, count_2 = 0, count_3 = 0;
     int max = 0, min = 0;
 
+    printf("Enter how numbers will be used, then numbers.\n");
+    printf("Program will count and print Min and Max numbers,\n");
+    printf("Set [MIN , MIN+(MAX-MIN)/3]\n");
+    printf("Set [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]\n");
+    printf("Set [MIN+(MAX-MIN)*2/3 , MAX]\n\n");
 
+    
     // Entering number n
     printf("Please enter how numbers will be used: ");
     while(n <= 0) {
@@ -73,8 +79,8 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         if ( (min <= nums[0][i]) && (nums[0][i] <= nums12) ) {
-            nums[1][j1] = nums[0][i];
-            j1++;
+            nums[1][count_1] = nums[0][i];
+            count_1++;
         }
     }
 
@@ -89,8 +95,8 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         if ( (nums21 <= nums[0][i]) && (nums[0][i] <= nums22) ) {
-            nums[2][j2] = nums[0][i];
-            j2++;
+            nums[2][count_2] = nums[0][i];
+            count_2++;
         }
     }
 
@@ -104,8 +110,8 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         if ( (nums31 <= nums[0][i]) && (nums[0][i] <= max) ) {
-            nums[3][j3] = nums[0][i];
-            j3++;
+            nums[3][count_3] = nums[0][i];
+            count_3++;
         }
     }
 
@@ -120,7 +126,7 @@ int main() {
     // Print [MIN , MIN+(MAX-MIN)/3]
     printf("\n\n[MIN , MIN+(MAX-MIN)/3] [%d, %d]", min, min+(max-min)/3);
     printf("\n{");
-    for (int i = 0; i < j1; i++)
+    for (int i = 0; i < count_1; i++)
         if (i == 0)
             printf("%d", nums[1][i]);
         else
@@ -131,7 +137,7 @@ int main() {
     // Print [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]
     printf("\n\n[MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3] [%d, %d]", min+(max-min)/3, min+(max-min)*2/3);
     printf("\n{");
-    for (int i = 0; i < j2; i++)
+    for (int i = 0; i < count_2; i++)
     if (i == 0)
             printf("%d", nums[2][i]);
         else
@@ -142,7 +148,7 @@ int main() {
     // Print [MIN+(MAX-MIN)*2/3 , MAX]
     printf("\n\n[MIN+(MAX-MIN)*2/3 , MAX] = [%d, %d]", min+(max-min)*2/3, max);
     printf("\n{");
-    for (int i = 0; i < j3; i++)
+    for (int i = 0; i < count_3; i++)
         if (i == 0)
             printf("%d", nums[3][i]);
         else
