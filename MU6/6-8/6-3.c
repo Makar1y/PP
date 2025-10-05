@@ -54,7 +54,7 @@ int main() {
 
 
 
-        FILE *f = fopen(filename, "w");
+        FILE *f = fopen(filename, "a");
         if (f != NULL) {
             fprintf(f, "%d\n", middle);
             printf("Result saved to \"%s\".\n", filename);

@@ -19,7 +19,7 @@ int main() {
     printf(": ");
 
     while (1) {
-        if ( (scanf("%100[^@]@%100[^@.].%100[^@\n]", before, between, after) == 3) && (getchar() == '\n') ) {
+        if ( (scanf("%100[^@\n]@%100[^@.\n].%100[^@\n]", before, between, after) == 3) && (getchar() == '\n') ) {
             if (valid(before) && valid(between) && valid(after)) {
                 printf("Email entered successfully.\n");
                 printf("Email domain: %s.%s\n", between, after);

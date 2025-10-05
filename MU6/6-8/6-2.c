@@ -1,50 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <custom_module.c>
 
-int is_valid_number(char *s, double *value) {
-    char *endptr;
-    char buf[64];
-    int len = strlen(s);
+#define NUMBER_MAX_LENGTH 100
 
-    // Remove \n
-    if (len > 0 && s[len - 1] == '\n') {
-        ((char*)s)[len - 1] = '\0';
-        len--;
-    }
-
-    // , -> . 
-    strcpy(buf, s);
-    for (int i = 0; buf[i]; i++) {
-        if (buf[i] == ',')
-            buf[i] = '.';
-            break;
-    }
-
-    *value = strtod(buf, &endptr);
-
-    // error
-    if (*endptr != '\0')
-        return 0;
-
-    // bounds check
-    if (*value < 10.0 || *value > 1000.0)
-        return 0;
-
-    // check nums adter ,
-    char *comma = strchr(s, ',');
-    if (comma != NULL) {
-        int fractional_len = strlen(comma + 1);
-        if (fractional_len > 3)
-            return 0;
-    }
-
-    return 1;
-}
 
 int main() {
-    char file_name[64] = "in.txt";
-    char number[64];
+    char file_name[FILENAME_MAX] = "in.txt";
+    char number[NUMBER_MAX_LENGTH];
     double val;
 
     printf("Please enter real number in in.txt (from 10 to 1000, max 3 digits after comma).\n");

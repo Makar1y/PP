@@ -3,12 +3,13 @@
 #include <stdlib.h>
 
 #define TRIES 5
+#define NUMBER_MAX_LENGTH 100
 
 int invalid_inputs_left = TRIES;
 
 int is_valid_number(char *s, double *value) {
     char *endptr;
-    char buf[64];
+    char buf[NUMBER_MAX_LENGTH];
     int len = strlen(s);
 
     // Remove \n
@@ -35,8 +36,8 @@ int is_valid_number(char *s, double *value) {
     if (*value < 10.0 || *value > 1000.0)
         return 0;
 
-    // check nums adter ,
-    char *comma = strchr(s, ',');
+    // check nums adter .
+    char *comma = strchr(s, '.');
     if (comma != NULL) {
         int fractional_len = strlen(comma + 1);
         if (fractional_len > 3)

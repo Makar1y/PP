@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <custom_module.c>
 
 int main() {
     int input;
     char last_char;
-    unsigned factorial = 1;
+    unsigned long factorial = 1;
 
     printf("Entre number and program will calculate factorial and also save result ot file out.txt.\n");
 
@@ -27,14 +28,12 @@ int main() {
     }
 
     // Factorial
-    for (int i = 1; i <= input; ++i) {
-        factorial *= i; 
-    }
+    factorial = get_factorial(input);
+
 
     // Result printing
-    printf("%u", factorial);
     if (factorial > input) {
-        printf("\n!%d = %u\n", input, factorial);
+        printf("\n!%d = %lu\n", input, factorial);
     } else {
         printf("\nError during calculations.\n");
         return 1;
@@ -45,7 +44,7 @@ int main() {
 
     result = fopen("out.txt", "w");
     if (result != NULL) {
-        fprintf(result, "Result: !%d = %u", input, factorial);
+        fprintf(result, "Result: !%d = %lu", input, factorial);
         printf("Result successfully saved to out.txt");
 
         fclose(result);
