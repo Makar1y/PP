@@ -21,9 +21,10 @@ int is_valid_number(char *s, double *value) {
     // , -> . 
     strcpy(buf, s);
     for (int i = 0; buf[i]; i++) {
-        if (buf[i] == ',')
+        if (buf[i] == ',') {
             buf[i] = '.';
             break;
+        }
     }
 
     *value = strtod(buf, &endptr);

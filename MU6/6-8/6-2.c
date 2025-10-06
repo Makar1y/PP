@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <custom_module.c>
+#include "custom_module.c"
 
 #define NUMBER_MAX_LENGTH 100
-
 
 int main() {
     char file_name[FILENAME_MAX] = "in.txt";
@@ -32,7 +31,7 @@ int main() {
         }
         fclose(f);
 
-        if (is_valid_number(number, &val)) {
+        if (str_valid_number(number, 10, 1000, 3)) {
             unsigned length = strlen(number);
             for (int i = 0; number[i]; ++i) {
                 if (number[i] == ',' || number[i] == '.') {

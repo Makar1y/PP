@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <custom_module.c>
+#include "custom_module.c"
 
 int main() {
     int input;

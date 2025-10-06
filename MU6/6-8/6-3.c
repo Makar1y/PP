@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include "custom_module.c"
 
 #define NUM_SIZE 100
 
 int main() {
     long a, b, c;
     int middle;
-    char filename[100];
+    char filename[FILENAME_MAX];
 
     printf("Program to find middle number\n");
     printf("Please enter three whole numbers in this format(without spaces):\n");
@@ -25,13 +26,7 @@ int main() {
         }
     }
 
-    if ((a >= b && a <= c) || (a <= b && a >= c)) {
-        middle = a;
-    } else if ((b >= a && b <= c) || (b <= a && b >= c)) {
-        middle = b;
-    } else {
-        middle = c;
-    }
+    middle = middle_num(a, b, c);
 
 
     while (1) {        
@@ -45,10 +40,10 @@ int main() {
             }
 
             int len = strlen(filename);
-            if (len > 4 && strcmp(filename + len - 4, ".txt") == 0) {
+            if (str_end_with(filename, ".txt")) {
                 break;
             } else {
-                printf("!!! Error, file extension should be .txt\n");
+                printf("!!! Error, file extension should be .txt and filename not empty\n");
             }
         }
 
