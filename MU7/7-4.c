@@ -1,25 +1,24 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
-long getFileSize(char *fileName) {
-    long size;
-    FILE *target_file;
+#define ARRAY_SIZE 20
 
-    target_file = fopen(fileName, "rb");
+void generateArray(int data[], int size, int low, int high) {
+    srand(time(NULL));
 
-    if (target_file != NULL) {
-
-        fseek(target_file, 0, SEEK_END);
-
-        size = ftell(target_file);
-
-        return size;
+    for (int i = 0; i < size; ++i) {
+        data[i] = (rand() % (high - low + 1) ) + low;
     }
-
-    return -1;
 }
 
+
 int main() {
+    int data[ARRAY_SIZE];
     
-    printf("%ld", getFileSize("7-3.c"));
+    generateArray(data, ARRAY_SIZE, 5, 10);
+    for (int i = 0; i < ARRAY_SIZE; ++i) {
+        printf("%d\n", data[i]);
+    }
     return 0;
 }
