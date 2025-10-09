@@ -1,29 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void welcome_print() {
-    printf("Enter how numbers will be used, then numbers.\n"
+    printf("Enter numbers one by one and ending with not number to stop.\n"
            "Program will count and print Min and Max numbers,\n"
            "Set [MIN , MIN+(MAX-MIN)/3]\n"
            "Set [MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3]\n"
            "Set [MIN+(MAX-MIN)*2/3 , MAX]\n\n");
 }
 
-void fill_array(int aray[], int size, int *max, int *min) {
-    for (int i = 0; i < size; i++) {
-        printf("Enter number %d: ", i + 1);
+void fill_array(int aray[], int *size, int *max, int *min) {
+    while (1) {
+        printf("Enter number %d: ", *size + 1);
 
         // Scan
-        scanf("%d", &aray[i]);
+        if (scanf("%d", &aray[*size]) != 1) {
+            printf("All numbers entered.");
+            return;
+        }
 
         // Min & Max finding
-        if (i == 0)
-            *max = *min = aray[i];
+        if (*size == 0)
+            *max = *min = aray[*size];
         else {
-            if (*max < aray[i])
-                *max = aray[i];
-            else if (*min > aray[i])
-                *min = aray[i];
+            if (*max < aray[*size])
+                *max = aray[*size];
+            else if (*min > aray[*size])
+                *min = aray[*size];
         }
+
+        *size += 1;
+        aray = realloc(aray, *size * sizeof(int));
     }
 }
 
@@ -32,20 +39,18 @@ int main() {
     int size = 0;
     int max = 0, min = 0;
     int first = 1;
+    int *dynamic_array = calloc(1, sizeof(int));
+
+    if (dynamic_array == NULL) {
+        printf("Error, unable to locate memory.");
+        return 1;
+    }
 
     welcome_print();
 
-    // Entering number n
-    printf("Please enter how numbers will be used: ");
-    scanf("%d", &size);
-
-    printf("\nNumber n=%d entered successfully.\n", size);
-    printf("Now enter %d numbers.\n\n", size);
-
-    int nums[size];
 
     // Nums entering
-    fill_array(nums, size, &max, &min);
+    fill_array(dynamic_array, &size, &max, &min);
 
     printf("\n\nMin: %d    Max: %d", min, max);
 
@@ -59,13 +64,13 @@ int main() {
     printf("\n\n[MIN , MIN+(MAX-MIN)/3] [%d, %d]", min, min+(max-min)/3);
     printf("\n{");
 
-    for (int i = 0; i < size; i++) {
-        if ( (min <= nums[i]) && (nums[i] <= nums12) ) {
+    for (int i = 0; i < size; ++i) {
+        if ( (min <= dynamic_array[i]) && (dynamic_array[i] <= nums12) ) {
             if (first == 1) {
-                printf("%d", nums[i]);
+                printf("%d", dynamic_array[i]);
                 first = 0;
             } else
-                printf(", %d", nums[i]);
+                printf(", %d", dynamic_array[i]);
         }
     }
     first = 1;
@@ -84,12 +89,12 @@ int main() {
     printf("\n{");
 
     for (int i = 0; i < size; i++) {
-        if ( (nums21 <= nums[i]) && (nums[i] <= nums22) ) {
+        if ( (nums21 <= dynamic_array[i]) && (dynamic_array[i] <= nums22) ) {
             if (first == 1) {
-                printf("%d", nums[i]);
+                printf("%d", dynamic_array[i]);
                 first = 0;
             } else
-                printf(", %d", nums[i]);
+                printf(", %d", dynamic_array[i]);
         }
     }
     first = 1;
@@ -108,16 +113,17 @@ int main() {
     printf("\n{");
 
     for (int i = 0; i < size; i++) {
-        if ( (nums31 <= nums[i]) && (nums[i] <= max) ) {
+        if ( (nums31 <= dynamic_array[i]) && (dynamic_array[i] <= max) ) {
             if (first == 1) {
-                printf("%d", nums[i]);
+                printf("%d", dynamic_array[i]);
                 first = 0;
             } else
-                printf(", %d", nums[i]);
+                printf(", %d", dynamic_array[i]);
         }
     }
 
     printf("}");
 
+    free(dynamic_array);
     return 0;
 }
