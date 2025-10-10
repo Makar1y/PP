@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define FILENAME "test.bin"
-#define TEST_INT 5
 
 unsigned long getFileSize(FILE *fileName) {
     unsigned long size;
@@ -14,12 +14,10 @@ unsigned long getFileSize(FILE *fileName) {
 }
 
 // Read value -> number_to_write, return -1 or 0
-int getValue(FILE *filename, int index, int *number_to_write) {
-    int number = -1;
-
-    if ((index * sizeof(int) < getFileSize(filename)) && (index * sizeof(int) >= 0) ) {
-        fseek(filename, index * sizeof(int), SEEK_SET);
-        if (fread(number_to_write, sizeof(int), 1, filename)) {
+int getValue(FILE *file, const int index, int *number_to_write) {
+    if ((index * sizeof(int) < getFileSize(file)) && (index * sizeof(int) >= 0) && (file != NULL)) {
+        fseek(file, index * sizeof(int), SEEK_SET);
+        if (fread(number_to_write, sizeof(int), 1, file)) {
             return 0;
         }
     }
@@ -27,11 +25,12 @@ int getValue(FILE *filename, int index, int *number_to_write) {
     return -1;
 }
 
-int setValue(FILE *filename, int index, int value) {
+int setValue(FILE *file, const char filename[], const int index, const int value) {
+    freopen(filename, "rb+", file);
 
-    if ((index * sizeof(int) < getFileSize(filename)) && (index * sizeof(int) >= 0)) {
-        fseek(filename, index * sizeof(int), SEEK_SET);
-        if (fwrite(&value, sizeof(int), 1, filename)) {
+    if ((index * sizeof(int) < getFileSize(file)) && (index * sizeof(int) >= 0) && (file != NULL)) {
+        fseek(file, index * sizeof(int), SEEK_SET);
+        if (fwrite(&value, sizeof(int), 1, file)) {
             return 0;
         }
     }
@@ -39,40 +38,81 @@ int setValue(FILE *filename, int index, int value) {
     return -1;
 }
 
-int addValue(FILE *filename, int index, int value) {
-    int temp;
+int addValue(FILE *file, const char filename[], const int index, const int value) {
+    int temp_num1, temp_num2;
+    int int_size = sizeof(int);
+    int count_of_nums = getFileSize(file) / sizeof(int);
 
-    if ((index * sizeof(int) <= getFileSize(filename)) && (index * sizeof(int) >= 0)) {
-        fseek(filename, -(int)(sizeof(int) - 1), SEEK_END); // Last number start position
+    fclose(file);
+    freopen(filename, "rb+", file);
 
-        // Move elements to right
-        while (ftell(filename) != (index * sizeof(int))) {
-            fread(&temp, sizeof(int), 1, filename);
-            fwrite(&temp, sizeof(int), 1, filename);
-            fseek(filename, (int)sizeof(int) * -3, SEEK_CUR);
-        };
+    if ((index <= count_of_nums) && (index >= 0) && (file != NULL)) {
+        for (int i = 0; i <= count_of_nums; ++i) {
 
-        // Move last element
-        fread(&temp, sizeof(int), 1, filename);
-        fwrite(&temp, sizeof(int), 1, filename);
-        fseek(filename, (int)sizeof(int) * -2, SEEK_CUR);
+            // Go to curent index
+            fseek(file, i, SEEK_SET);
 
-        // Write value
-        if (fwrite(&value, sizeof(int), 1, filename)) {
-            return 0;
+            // if index
+            if (i == index) {
+                if (i != count_of_nums) {
+                    fread(&temp_num1, int_size, 1, file);
+                    fseek(file, -int_size, SEEK_CUR);
+                }
+                fwrite(&value, int_size, 1, file);
+            
+            // if EOF and not index
+            } else if (i == count_of_nums) {
+                fwrite(&temp_num1, int_size, 1, file);
+
+            // If > index and not EOF
+            } else if (i > index) {
+                fread(&temp_num2, int_size, 1, file);
+                fseek(file, -int_size, SEEK_CUR);
+                fwrite(&temp_num1, int_size, 1, file);
+                temp_num1 = temp_num2;
+            }
         }
+        return 0;
+    }
+    return -1;
+}
+
+int remValue(FILE *file, const char filename[], const int index) {
+    int int_size = sizeof(int);
+    int count_of_nums = getFileSize(file) / sizeof(int);
+    int *buffer = malloc(int_size * (count_of_nums - 1));
+
+    rewind(file);
+    if ((index < count_of_nums) && (index >= 0) && (file != NULL) && (buffer != NULL)) {
+        for (int i = 0, buffer_index = 0; i < count_of_nums; ++i) {
+            int temp;
+
+            fread(&temp, int_size, 1, file);
+            if (i != index) {
+                buffer[buffer_index++] = temp;
+            }
+        }
+
+        freopen(filename, "wb+", file);
+        if (file != NULL && count_of_nums == 1){
+            return 0;
+        } else if (file != NULL) {
+            if (fwrite(buffer, int_size, count_of_nums - 1, file)) {
+                return 0;
+            }
+        }  
     }
 
     return -1;
 }
 
 int main() {
-    FILE *bin_file = fopen(FILENAME, "rb+");
+    FILE *bin_file = fopen(FILENAME, "rb");
     int num = 0;
     int res;
 
     if (bin_file != NULL) {
-        res = addValue(bin_file, 1, TEST_INT);
+        res = addValue(bin_file, FILENAME, 0, 252);
         if (res == 0) {
             printf("Ok.\n");
         } else {
