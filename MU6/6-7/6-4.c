@@ -3,6 +3,7 @@
 
 #define BUFFER 100
 #define TRIES 5
+#define WEEK_FILE "week.txt"
 
 int tries = TRIES;
 
@@ -107,7 +108,7 @@ int main() {
 
 
     // Localization?
-    FILE *weekdays = fopen("week.txt", "r");
+    FILE *weekdays = fopen(WEEK_FILE, "r");
 
     if (weekdays != NULL) {
         for (int i = 1; fgets(weekday_str, sizeof weekday_str, weekdays); ++i) {

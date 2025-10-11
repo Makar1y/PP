@@ -129,7 +129,7 @@ int main(int arg_count, char *args[]) {
                 char option;
 
                 printf("Word %s not in dictionary.\n", buffer);
-                printf("Start enter with '1' to add to dictionary, or any other key to mark as incorrect: ");
+                printf("Start enter with '1' to add to dictionary, or any other to mark as incorrect: ");
                 if (scanf(" %c", &option) == 1) {
                     if (option == '1') {
                         if (add_to_dictionary(buffer)) {

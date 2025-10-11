@@ -67,7 +67,7 @@ int main() {
         if (f == NULL) {
             --invalid_inputs_left;
             printf("!!! (Tries left: %d) Error, %s", invalid_inputs_left, file_name);
-            perror("->");
+            perror("|");
             printf("Enter another file name: ");
             scanf("%63s", file_name);
             continue;

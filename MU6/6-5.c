@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#define EMAIL_PART_SIZE 100
+#define OUTPUT_FILE "emails.txt"
+
 int valid(char *array) {
 
     for (int i = 0; i < sizeof array && array[i] != '\0'; ++i) {
@@ -12,10 +15,11 @@ int valid(char *array) {
 }
 
 int main() {
-    char before[100], between[100], after[100];
+    // before @, between @ and first .(dot), after first .(dot)
+    char before[EMAIL_PART_SIZE], between[EMAIL_PART_SIZE], after[EMAIL_PART_SIZE];
 
     printf("Enter email addres to check if it valid.\n");
-    printf("All correct email addressed wil be saved to \"emails.txt\".\n\n");
+    printf("All correct email addressed wil be saved to \"%s\".\n\n", OUTPUT_FILE);
     printf(": ");
 
     while (1) {
@@ -24,17 +28,18 @@ int main() {
                 printf("Email entered successfully.\n");
                 printf("Email domain: %s.%s\n", between, after);
 
-                FILE *emails = fopen("emails.txt", "a");
+                FILE *emails = fopen(OUTPUT_FILE, "a");
 
                 if (emails != NULL) {
 
-                    fprintf(emails, "%s@%s.%s\n", before, between, after);
+                    fprintf(emails, "\n%s@%s.%s", before, between, after);
 
                     fclose(emails);
-                    printf("Email saved to emails.txt\n");
+                    printf("Email saved to %s\n", OUTPUT_FILE);
                     printf("\nEnter next email(press ctrl+c to exit): ");
                 } else {
-                    perror("!!! Error, emails.txt");
+                    printf("!!! Error, %s", OUTPUT_FILE);
+                    perror(" |");
                 }
             } else {
                 printf("Invalid email, there must be at least one symbol before, after and between @ and . symbols.\n");

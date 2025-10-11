@@ -2,6 +2,7 @@
 #include <string.h>
 
 #define TRIES 5
+#define EMAIL_PART_SIZE 100
 
 int tries = TRIES;
 
@@ -17,7 +18,7 @@ int valid(char *array) {
 }
 
 int main() {
-    char before[100], between[100], after[100];
+    char before[EMAIL_PART_SIZE], between[EMAIL_PART_SIZE], after[EMAIL_PART_SIZE];
 
     printf("Enter email addres to check if it valid.\n");
     printf("All correct email addressed wil be saved to \"emails.txt\".\n\n");
@@ -38,7 +39,7 @@ int main() {
 
                 if (emails != NULL) {
 
-                    fprintf(emails, "%s@%s.%s\n", before, between, after);
+                    fprintf(emails, "\n%s@%s.%s", before, between, after);
 
                     fclose(emails);
                     printf("Email saved to emails.txt\n");

@@ -12,7 +12,7 @@ int main() {
     while (1) {
         printf(": ");
         if ( (scanf("%d%c", &input, &last_char) == 2) && (last_char == '\n') ) {
-            if (input > 0) {
+            if (input >= 0) {
                 printf("Number %d entred successfully.\n", input);
                 break;
             } else { 
@@ -24,6 +24,7 @@ int main() {
                 scanf("%c", &last_char);
             }
             printf("!!! Error, please enter whole number.\n");
+            last_char = '\0'; // Clearing \n to proper work with next input error.
         }
     }
 
@@ -32,7 +33,7 @@ int main() {
 
 
     // Result printing
-    if (factorial > input) {
+    if (factorial >= input) {
         printf("\n!%d = %lu\n", input, factorial);
     } else {
         printf("\nError during calculations.\n");

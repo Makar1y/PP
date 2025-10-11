@@ -9,7 +9,7 @@ int tries = TRIES;
 int main() {
     long a, b, c;
     int middle;
-    char filename[100];
+    char filename[FILENAME_MAX];
 
     printf("Program to find middle number\n");
     printf("Please enter three whole numbers in this format(without spaces):\n");
@@ -72,7 +72,7 @@ int main() {
 
         FILE *f = fopen(filename, "a");
         if (f != NULL) {
-            fprintf(f, "%d\n", middle);
+            fprintf(f, "\nMiddle for nums %d %d %d is %d",a, b, c, middle);
             printf("Result saved to \"%s\".\n", filename);
 
             fclose(f);

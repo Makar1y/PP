@@ -2,6 +2,7 @@
 #include <string.h>
 
 #define BUFFER 100
+#define WEEK_FILE "week.txt"
 
 
 int valid_date(int year, int month, int day) {
@@ -96,7 +97,7 @@ int main() {
 
 
     // Localization?
-    FILE *weekdays = fopen("week.txt", "r");
+    FILE *weekdays = fopen(WEEK_FILE, "r");
 
     if (weekdays != NULL) {
         for (int i = 1; fgets(weekday_str, sizeof weekday_str, weekdays); ++i) {

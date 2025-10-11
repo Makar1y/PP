@@ -2,7 +2,6 @@
 #include <string.h>
 #include "custom_module.c"
 
-#define NUM_SIZE 100
 
 int main() {
     long a, b, c;
@@ -51,7 +50,7 @@ int main() {
 
         FILE *f = fopen(filename, "a");
         if (f != NULL) {
-            fprintf(f, "%d\n", middle);
+            fprintf(f, "\nMiddle for nums %d %d %d is %d",a, b, c, middle);
             printf("Result saved to \"%s\".\n", filename);
 
             fclose(f);
