@@ -31,7 +31,6 @@ void fill_array(int aray[], int size, int *max, int *min) {
 int main() {
     int size = 0;
     int max = 0, min = 0;
-    int first = 1;
 
     welcome_print();
 
@@ -57,18 +56,13 @@ int main() {
     int nums12 = min + (max - min) / 3;
 
     printf("\n\n[MIN , MIN+(MAX-MIN)/3] [%d, %d]", min, min+(max-min)/3);
-    printf("\n{");
+    printf("\n{ ");
 
     for (int i = 0; i < size; i++) {
         if ( (min <= nums[i]) && (nums[i] <= nums12) ) {
-            if (first == 1) {
-                printf("%d", nums[i]);
-                first = 0;
-            } else
-                printf(", %d", nums[i]);
+            printf("%d ", nums[i]);
         }
     }
-    first = 1;
 
     printf("}");
 
@@ -81,21 +75,15 @@ int main() {
     int nums22 = min + (max - min) * 2 / 3; // -|
 
     printf("\n\n[MIN+(MAX-MIN)/3 , MIN+(MAX-MIN)*2/3] [%d, %d]", min+(max-min)/3, min+(max-min)*2/3);
-    printf("\n{");
+    printf("\n{ ");
 
     for (int i = 0; i < size; i++) {
         if ( (nums21 <= nums[i]) && (nums[i] <= nums22) ) {
-            if (first == 1) {
-                printf("%d", nums[i]);
-                first = 0;
-            } else
-                printf(", %d", nums[i]);
+            printf("%d ", nums[i]);
         }
     }
-    first = 1;
 
     printf("}");
-
 
 
     // Printing [MIN+(MAX-MIN)*2/3 , MAX]
@@ -105,15 +93,11 @@ int main() {
     int nums31 = min + (max - min) * 2 / 3;
 
     printf("\n\n[MIN+(MAX-MIN)*2/3 , MAX] = [%d, %d]", min+(max-min)*2/3, max);
-    printf("\n{");
+    printf("\n{ ");
 
     for (int i = 0; i < size; i++) {
         if ( (nums31 <= nums[i]) && (nums[i] <= max) ) {
-            if (first == 1) {
-                printf("%d", nums[i]);
-                first = 0;
-            } else
-                printf(", %d", nums[i]);
+            printf("%d ", nums[i]);
         }
     }
 
