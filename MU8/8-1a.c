@@ -13,7 +13,7 @@ void fillArray(int array[], const int size, const int low, const int high) {
 }
 
 
-int * createArray(const int size, const int low, const int high) {
+int* createArray(const int size, const int low, const int high) {
     int *arr = calloc(size, sizeof(int)); 
 
     if ((arr != NULL) && (low <= high)) {
