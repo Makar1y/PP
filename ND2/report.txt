@@ -2,3 +2,5 @@ Parašyti užtruko apie 60-120 minučių, visaip išbandyti ir patobulinti – a
 
 Buvo keletas smulkių klaidų (pamiršau parašyti ; arba kopijuojant pakeisti masyvo indeksą ir pan.)
 Ju taisimas užėmė maks. 5-10 min.
+
+Prirašiau nereikalingu dalyku, perrašymas užeme 60-90 min.
