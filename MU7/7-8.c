@@ -11,12 +11,12 @@ void swap(int *a, int *b) {
     *b = temp;
 }
 
-
 int medianThree(int *array, int a, int b, int c) {
     int a_a = array[a];
     int a_b = array[b];
     int a_c = array[c];
 
+    // Someone clever on stackoverflow said that this xor faster than more, less operations.
     if ((a_a > a_b) ^ (a_a > a_c)) 
         return a;
     else if ((a_b < a_a) ^ (a_b < a_c)) 
