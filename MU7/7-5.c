@@ -20,6 +20,6 @@ long getFileSize(char *fileName) {
 
 int main() {
     
-    printf("%ld", getFileSize("7-3.c"));
+    printf("%ld", getFileSize("7-5.c"));
     return 0;
 }

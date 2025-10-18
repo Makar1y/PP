@@ -105,7 +105,8 @@ int main() {
         array[i] = rand() % 101;
     }
 
-    nrec_quicksort(array, 0, ARRAY_SIZE - 1);
+    rec_quicksort(array, 0, ARRAY_SIZE - 1);
+    // nrec_quicksort(array, 0, ARRAY_SIZE - 1);
 
     for (int i = 0; i < ARRAY_SIZE; ++i) {
         printf(" %d ", array[i]);

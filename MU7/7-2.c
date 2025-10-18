@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int get_factorial(int number) {
+int getFactorial_nrec(int number) {
     int factorial = 1;
 
     if (number == 0) {
@@ -16,7 +16,7 @@ int get_factorial(int number) {
     return factorial;
 }
 
-int get_factorial_rec(int number) {
+int getFactorial(int number) {
 
     if (number == 0) {
         return 1;
@@ -24,12 +24,12 @@ int get_factorial_rec(int number) {
         return 0;
     }
 
-    return number * get_factorial_rec(number - 1);
+    return number * getFactorial(number - 1);
 }
 
 int main() {
-    int num = 10;
+    int num = 5;
     
-    printf("%d ?= %d", get_factorial_rec(num), get_factorial(num));
+    printf("%d ?= %d", getFactorial(num), getFactorial_nrec(num));
     return 0;
 }

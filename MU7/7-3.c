@@ -7,7 +7,8 @@ int getPositiveNumber(char *msg) {
         printf("%s", msg);
 
         if ((fscanf(stdin, "%d", &input_num) == 1) && (getchar() == '\n')) {
-            break;
+            if (input_num > 0)
+                break;
         } else {
             while (getchar() != '\n')
                 ;
@@ -21,6 +22,6 @@ int getPositiveNumber(char *msg) {
 
 int main() {
 
-    printf("Res: %d", getPositiveNumber("Just enter number: "));
+    printf("Res: %d", getPositiveNumber("Just enter positive number: "));
     return 0;
 }

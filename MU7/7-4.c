@@ -4,6 +4,7 @@
 
 #define ARRAY_SIZE 20
 
+
 void generateArray(int data[], int size, int low, int high) {
     srand(time(NULL));
 

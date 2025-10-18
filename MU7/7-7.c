@@ -112,15 +112,14 @@ int main() {
     int res;
 
     if (bin_file != NULL) {
-        res = addValue(bin_file, FILENAME, 0, 252);
+        res = remValue(bin_file, FILENAME, 0);
         if (res == 0) {
             printf("Ok.\n");
         } else {
             printf("File function error.\n");
         }    
     } else {
-        printf("Error...\n");
-        perror("");
+        perror("Error");
     }
 
     fclose(bin_file);
