@@ -23,9 +23,8 @@ int memory_parts_multiplier = 0;
 /* -------------- Helping functions -------------- */
 
 /// @brief reallocates(grow) system memory array
-/// @return if needed reallocation status
+/// @return reallocation status
 void* memory_realloc() {
-    Memory **save = &memory;
     Memory *ret;
 
     long old_capacity = MEMORY_PARTS * memory_parts_multiplier;
@@ -33,7 +32,7 @@ void* memory_realloc() {
     ret = realloc(memory, new_capacity * sizeof(Memory));
 
     if (ret != NULL) {
-        *save = ret;
+        memory = ret;
         ++memory_parts_multiplier;
         for (int i = old_capacity; i < old_capacity + MEMORY_PARTS; ++i) {
             memory[i].ptr = NULL;
@@ -194,11 +193,11 @@ int main() {
         int *ptr3 = myCalloc(5, sizeof(int));
         printf(" ptr3 = %p\n parts[2] = %p", ptr3, memory[2].ptr);
 
-        printf("%s %d\n", ptr2, getMallocSize(ptr2));
+        printf("%s %ld\n", ptr2, getMallocSize(ptr2));
 
         ptr1[9] = 5;
 
-        printf("Size:%d 10 el.:%d\n\n", getMallocSize(ptr1), ptr1[9]);
+        printf("Size:%ld 10 el.:%d\n\n", getMallocSize(ptr1), ptr1[9]);
 
 
         printf("%d\n\n", ptr3[4]);
