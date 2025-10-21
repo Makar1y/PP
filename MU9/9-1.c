@@ -11,7 +11,6 @@ void printPoint(Point p) {
     printf("(%f, %f)", p.x, p.y);
 }
 
-/// @return 
 Point createPoint(double x, double y) {
     Point result = {x, y};
     return result;
