@@ -51,15 +51,14 @@ void printStack(Stack *stack) {
    }
 }
 
-/// @return Stack size if possible, otherwise error code -1.
+// @return Stack size if possible, otherwise error code -1.
 int getStackSize(Stack *stack) {
    if (stack != NULL)
       return stack->size;
    return -1;
 }
 
-/// @result If possible pushes and updates stack,
-/// otherwise silent fail.
+// @result If possible pushes and updates stack,
 void push(Stack *stack, Point value) {
    if (stack != NULL) {
       if (stack->size == 0 || (stack->size % SIZE_PART == 0)) {
@@ -77,8 +76,8 @@ void push(Stack *stack, Point value) {
    }
 }
 
-/// @return If possible -> stack element or 0 if stack empty,
-/// otherwise -> undefined behavior.
+// @return If possible -> stack element or 0 if stack empty,
+// otherwise exit with FAILURE.
 Point top(Stack *stack) {
    if (stack != NULL) {
       if (stack->size > 0) {
@@ -88,10 +87,11 @@ Point top(Stack *stack) {
       Point zero = {0, 0};
       return zero;
    }
+   exit(EXIT_FAILURE);
 }
 
-/// @return If possible -> stack element or 0 if stack empty,
-/// otherwise -> undefined behavior.
+// @return If possible -> stack element or 0 if stack empty,
+/// otherwise exit with FAILURE.
 Point pop(Stack *stack) {
    if (stack != NULL) {
       Point result = top(stack);
@@ -100,6 +100,7 @@ Point pop(Stack *stack) {
       }
       return result;
    }
+   exit(EXIT_FAILURE);
 }
 
 void destroyStack(Stack *stack) {
@@ -116,6 +117,8 @@ int main() {
    Stack stack;
    initStack(&stack);
    srand(time(NULL));
+
+   top(NULL);
 
    for (int i = 0; i < 5; ++i) {
       // 100 / 0.01 = 10 000
