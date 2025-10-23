@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUFFER_SIZE 256
+
 void format(char *input, char *output, const int buffer_size) {
    if (input != NULL) {
       int j = 0;
@@ -57,13 +59,12 @@ int main(int argc, char **argv) {
 
    char *buffer_in;
    char *buffer_out;
-   int buffer_size = 256;
-   buffer_in = malloc(buffer_size * sizeof(char));
-   buffer_out = malloc(buffer_size * sizeof(char));
+   buffer_in = malloc(BUFFER_SIZE * sizeof(char));
+   buffer_out = malloc(BUFFER_SIZE * sizeof(char));
 
 
-   while (fgets(buffer_in, buffer_size, input) != NULL) {
-      format(buffer_in, buffer_out, buffer_size);
+   while (fgets(buffer_in, BUFFER_SIZE, input) != NULL) {
+      format(buffer_in, buffer_out, BUFFER_SIZE);
       fprintf(output, "%s", buffer_out);
    }
 
