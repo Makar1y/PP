@@ -1,0 +1,3 @@
+Planuojama skirti ne daugiau 5 valandu, ir sutkti iki 10-15 klaidu.
+
+Rezultatas: laiko - 121 min., klaidos - 5
