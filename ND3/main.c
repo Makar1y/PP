@@ -8,7 +8,7 @@ void format(char *input, char *output, const int buffer_size) {
       int j = 0;
 
       for (int i = 0; i < buffer_size; ++i) {
-         if (input[i-1] == '\0') return;
+         if (i > 0 && input[i-1] == '\0') return;
 
          if (input[i] == ' ') {
             char pre_char = 2;
@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
    // Output file opening
    FILE *output = fopen(argv[2], "w");
-   if(input == NULL) {
+   if(output == NULL) {
       perror(argv[2]);
    }
 
