@@ -48,12 +48,15 @@ int main(int argc, char **argv) {
    FILE *input = fopen(argv[1], "r");
    if(input == NULL) {
       perror(argv[1]);
+      return 1;
    }
 
    // Output file opening
    FILE *output = fopen(argv[2], "w");
    if(output == NULL) {
       perror(argv[2]);
+      fclose(input);
+      return 1;
    }
 
    char *buffer_in;
@@ -70,6 +73,8 @@ int main(int argc, char **argv) {
 
    free(buffer_in);
    free(buffer_out);
+   fclose(input);
+   fclose(output);
 
    printf("Text successfully formatted and transferred from %s to %s", argv[1], argv[2]);
    return 0;
