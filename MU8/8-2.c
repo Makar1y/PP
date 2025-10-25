@@ -24,7 +24,7 @@ char* largest_input_file(const int argc, char *argv[]){
     long max_size = -1;
     long tmp_size = 0;
 
-    for (int i = 1; i < argc; ++i) {
+    for (int i = 1; i <= argc; ++i) {
         tmp_size = getFileSize(argv[i]);
 
         if ((tmp_size >= 0) && (tmp_size > max_size)) {
@@ -38,7 +38,7 @@ char* largest_input_file(const int argc, char *argv[]){
 
 
 int main(const int argc, char *argv[]) {
-    const char *name = largest_input_file(argc, argv);
+    const char *name = largest_input_file(argc - 1, argv);
     if (name != NULL) 
         printf("%s\n", name);
     else

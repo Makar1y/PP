@@ -61,6 +61,7 @@ int main() {
     char ***arr = create_array(ROWS, COLUMNS);
     int i, j;
     char str[250] = "";
+
     printf("Write: ");
     while (scanf("%d%d%s", &i, &j, str) == 3) {
         if (insert_to_array(arr, i, j, str)) {
@@ -76,6 +77,7 @@ int main() {
         printf("Write: ");
     }
     printf("\nExit...");
+
     free_array(arr, ROWS, COLUMNS);
     return 0;
 }

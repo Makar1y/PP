@@ -4,10 +4,7 @@
 
 
 /* ------------------- Setup ------------------- */
-
-// dynamic array growing part
-// 2 for easier testing/debugging
-#define MEMORY_PARTS 2
+#define MEMORY_SIZE 10
 
 // structure to store memories
 typedef struct {
@@ -15,45 +12,21 @@ typedef struct {
     long size;
 } Memory;
 
-// Memory array (dynamic to grow if needed)
-Memory *memory = NULL;
-int memory_parts_multiplier = 0;
+// Memory array
+Memory memory[MEMORY_SIZE] = {0};
 
 
 /* -------------- Helping functions -------------- */
 
-/// @brief reallocates(grow) system memory array
-/// @return reallocation status
-void* memory_realloc() {
-    Memory *ret;
-
-    long old_capacity = MEMORY_PARTS * memory_parts_multiplier;
-    long new_capacity = (memory_parts_multiplier + 1) * MEMORY_PARTS;
-    ret = realloc(memory, new_capacity * sizeof(Memory));
-
-    if (ret != NULL) {
-        memory = ret;
-        ++memory_parts_multiplier;
-        for (int i = old_capacity; i < old_capacity + MEMORY_PARTS; ++i) {
-            memory[i].ptr = NULL;
-        }
-    }
-    return ret;
-}
-
-
 /// @brief Finds unused memory in memory array
 /// @return unused memory array index
 int find_free_index() {
-    for (int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+    for (int i = 0; i < MEMORY_SIZE; ++i) {
         if (memory[i].ptr == NULL) {
             return i;
         }
     }
-
-    int to_ret = MEMORY_PARTS * memory_parts_multiplier;
-    memory_realloc();
-    return to_ret;
+    return -1;
 }
 
 
@@ -79,7 +52,7 @@ void swap(int index1, int index2) {
 void* myMalloc(size_t size) {
     int index = find_free_index();
 
-    if (size >= 0) {
+    if (index >=0) {
         memory[index].ptr = malloc(size);
         memory[index].size = size;
         return memory[index].ptr;
@@ -96,7 +69,7 @@ void* myMalloc(size_t size) {
 void* myCalloc(int num_of_elements, size_t size) {
     int index = find_free_index();
 
-    if (size >= 0) {
+    if (index >=0) {
         memory[index].ptr = calloc(num_of_elements , size);
         memory[index].size = size * num_of_elements;
         printf("%p\n", memory[index].ptr);
@@ -106,17 +79,18 @@ void* myCalloc(int num_of_elements, size_t size) {
 }
 
 
-/// @brief 
-/// @param pointer 
-/// @param new_size 
-/// @return 
+/// @brief Reallocate memory of selected array 
+/// @param pointer Pointer to array
+/// @param new_size New array size
+/// @return Null if failed to reallocate and pointer to new array if success
 void* myRealloc(void *pointer, size_t new_size) {
     if (pointer != NULL) {
-        for (int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+        for (int i = 0; i < MEMORY_SIZE; ++i) {
             // printf("%p\n", memory_parts[i].ptr);
             if (pointer == memory[i].ptr) {
-                memory[i].ptr = realloc(pointer, new_size);
-                if (memory[i].ptr != NULL) {
+                void *new_ptr = realloc(pointer, new_size);
+                if (new_ptr != NULL) {
+                    memory[i].ptr = new_ptr;
                     memory[i].size = new_size;
                 }
                 return memory[i].ptr;
@@ -127,12 +101,12 @@ void* myRealloc(void *pointer, size_t new_size) {
 }
 
 
-/// @brief 
-/// @param pointer 
-/// @return 
+/// @brief Free array
+/// @param pointer Pointer to array
+/// @return 0 if success and -1 if error
 int myFree(void *pointer) {
     if (pointer != NULL) {
-        for(int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+        for(int i = 0; i < MEMORY_SIZE; ++i) {
             if (memory[i].ptr == pointer) {
                 free(memory[i].ptr);
                 memory[i].ptr = NULL;
@@ -144,12 +118,12 @@ int myFree(void *pointer) {
 }
 
 
-/// @brief 
-/// @param pointer 
-/// @return 
+/// @brief Get size  of array
+/// @param pointer pointer to array
+/// @return size of array(bytes) or -1 if error
 long getMallocSize(void *pointer) {
     if (pointer != NULL) {
-        for(int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+        for(int i = 0; i < MEMORY_SIZE; ++i) {
             if (memory[i].ptr == pointer) {
                 return memory[i].size;
             }
@@ -158,20 +132,21 @@ long getMallocSize(void *pointer) {
     return -1;
 }
 
-/// @brief 
+/// @brief Free all memory
 void freeAll() {
-    for(int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+    for(int i = 0; i < MEMORY_SIZE; ++i) {
         if (memory[i].ptr != NULL) {
-            memory[i].ptr = realloc(memory[i].ptr, 0);
+            free(memory[i].ptr);
+            memory[i].ptr = NULL;
         }
     }
 }
 
-/// @brief 
+/// @brief Defragment memory so there will be no gaps between memories parts
 void defragmentMemory() {
-    for (int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+    for (int i = 0; i < MEMORY_SIZE; ++i) {
         if (memory[i].ptr == NULL) {
-            for (int j = i + 1; j < MEMORY_PARTS * memory_parts_multiplier; ++j) {
+            for (int j = i + 1; j < MEMORY_SIZE; ++j) {
                 if (memory[j].ptr != NULL) {
                     swap(i, j);
                     break;
@@ -185,15 +160,15 @@ void defragmentMemory() {
 
 int main() {
     // Initialization
-    if (memory_realloc()) {
+    if (memory != NULL) {
 
 
         int *ptr1 = myMalloc(10 * sizeof(int));
         char *ptr2 = myCalloc(20, sizeof(char));
         int *ptr3 = myCalloc(5, sizeof(int));
-        printf(" ptr3 = %p\n parts[2] = %p", ptr3, memory[2].ptr);
+        printf(" ptr3 = %p\n parts[2] = %p\n", ptr3, memory[2].ptr);
 
-        printf("%s %ld\n", ptr2, getMallocSize(ptr2));
+        printf("%p %ld\n", ptr2, getMallocSize(ptr2));
 
         ptr1[9] = 5;
 
@@ -213,12 +188,9 @@ int main() {
 
         myFree(ptr2);
         defragmentMemory();
-        for (int i = 0; i < MEMORY_PARTS * memory_parts_multiplier; ++i) {
+        for (int i = 0; i < MEMORY_SIZE; ++i) {
             printf("%p\n", memory[i].ptr);
         }
-
-
-        free(memory);
     }
     return 0;
 }
