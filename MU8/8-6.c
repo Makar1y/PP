@@ -171,7 +171,7 @@ int main() {
         printf("%p %ld\n", ptr2, getMallocSize(ptr2));
 
         ptr1[9] = 5;
-
+`
         printf("Size:%ld 10 el.:%d\n\n", getMallocSize(ptr1), ptr1[9]);
 
 
