@@ -2,15 +2,13 @@
 #include <assert.h>
 #include <string.h>
 
-char* my_strchr(char *str1, const int str2) {
+char* my_strchr(const char *str1, const int str2) {
    if (str1 != NULL) {
       size_t len = strlen(str1);
       
-      for(int i = 0; i <= len; ++i) {
-         if (str1[i] == str2) {
-            return str1 + i;
-         }
-      }
+      for(int i = 0; i <= len; ++i)
+         if (str1[i] == str2)
+            return (char*)(str1 + i);
    }
    return NULL;
 }

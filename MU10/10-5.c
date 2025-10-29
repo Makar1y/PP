@@ -12,7 +12,7 @@ void* my_memchr(const char *str, int ch, size_t n) {
 
 int main() {
    const char data[] = "Hello, world!";
-
+   
    // Happy cases
    assert(my_memchr(data, 'H', strlen(data)) == memchr(data, 'H', strlen(data)));
    assert(my_memchr(data, 'w', strlen(data)) == memchr(data, 'w', strlen(data)));

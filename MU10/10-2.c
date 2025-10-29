@@ -40,11 +40,11 @@ int main() {
 
    // Errors cases
    printf("Check ");
-   assert(strcmp(my_strcat(NULL, NULL), "NULL") == 0);  // original strcat crash
+   assert(my_strcat(NULL, NULL) == NULL);  // original strcat crash
    printf("passed.\n");
 
    printf("Check ");
-   assert(strcmp(my_strcat(NULL, str5), "NULL") == 0);  // original strcat crash
+   assert(my_strcat(NULL, str5) == NULL);  // original strcat crash
    printf("passed.\n");
 
     char a[1001], b[501];
