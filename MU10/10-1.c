@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 
-size_t my_strlen(char * str, size_t max_len) {
+size_t my_strlen(const char * str, size_t max_len) {
    size_t counter = 0;
    if (str != NULL)
       while (*(str + counter) != '\0' && counter < max_len) {
