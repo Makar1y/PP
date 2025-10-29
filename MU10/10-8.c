@@ -7,26 +7,22 @@ char *LAST_PTR = NULL;
 
 char* my_strtok(char *str, const char *separators) {
    if (str == NULL) {
-      printf("%c%c%c", LAST_PTR[0], LAST_PTR[1], LAST_PTR[2]);
-      for (int i = 0; LAST_PTR[i] != '\0'; ++i) {
-         if (LAST_PTR[i] = *separators) {
-            str = LAST_PTR;
-            LAST_PTR += i;
-            LAST_PTR[-1] = '\0';
-            return str;
-         }
+      char *ret = LAST_PTR;
+      LAST_PTR = strpbrk(LAST_PTR, separators) + 1;
+      if (LAST_PTR != NULL)
+         LAST_PTR[-1] = '\0';
+      else {
+         LAST_PTR = NULL;
       }
-   } else {
-      LAST_PTR = str + 6;
-      str[5] = '\0';
-      return str;
+      return ret;
    }
-   printf("Error!");
-   exit(1);
+   LAST_PTR = strpbrk(str, separators) + 1;
+   LAST_PTR[-1] = '\0';
+   return str;
 }
 
 
-int m3ain() {
+int main() {
    printf(" -------------------- PROGRAM ----------------------\n\n");
    char my_test_str_1[] = "Super puper test string to test strtok.";
    char test_str_1[] = "Super puper test string to test strtok.";
