@@ -113,7 +113,7 @@ void sort_min_to_max(DoublyLinkedList **list, int reverse) {
 
    while (current != NULL) {
       DoublyLinkedList *next = current->next;
-      int curr_str_len = (current->str != NULL) ? strlen(current->str) : 0;
+      int curr_str_len = strlen(current->str);
       int sorted_str_len = (sorted && (sorted->str != NULL)) ? strlen(sorted->str) : 0;
 
       int reverse_direction = reverse ? (sorted_str_len <= curr_str_len) : (sorted_str_len >= curr_str_len);
@@ -127,16 +127,17 @@ void sort_min_to_max(DoublyLinkedList **list, int reverse) {
 
       } else {
          DoublyLinkedList *current_sorted = sorted;
-         int curr_str_len = current->str != NULL ? strlen(current->str) : 0;
-         int current_sorted_next_str_len = (current_sorted->next && current_sorted->next->str) ? strlen(current_sorted->next->str) : 0;
+         int current_sorted_next_str_len = strlen(current_sorted->next->str);
 
          if (reverse) {
             while (current_sorted->next != NULL && current_sorted_next_str_len > curr_str_len) {
                current_sorted = current_sorted->next;
+               current_sorted_next_str_len = strlen(current_sorted->next->str);
             }
          } else {
             while (current_sorted->next != NULL && current_sorted_next_str_len < curr_str_len) {
                current_sorted = current_sorted->next;
+               current_sorted_next_str_len = strlen(current_sorted->next->str);
             }
          }
 
