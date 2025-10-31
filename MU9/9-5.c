@@ -10,9 +10,6 @@ typedef struct DLL {
    struct DLL *next;
 } DoublyLinkedList;
 
-DoublyLinkedList* sort(DoublyLinkedList *start, DoublyLinkedList *end);
-void rec_quicksort(DoublyLinkedList *start, DoublyLinkedList *end);
-
 
 DoublyLinkedList* create_dll_list(char *str){
    DoublyLinkedList *list = calloc(1, sizeof(DoublyLinkedList));
@@ -30,10 +27,6 @@ void insert_element(DoublyLinkedList **list, char* str) {
       new->next = *list;
       (*list)->previous = new;
       *list = new;
-   } else {
-      if (*list == NULL) {
-         *list = NULL;
-      }
    }
 }
 
@@ -76,20 +69,88 @@ void print_list(DoublyLinkedList *list) {
     }
 }
 
-void sort_alphabet(DoublyLinkedList **list) {
 
+void sort_alphabet(DoublyLinkedList **list) {
+   if (*list == NULL) return;
+   DoublyLinkedList *sorted = NULL;
+   DoublyLinkedList *current = *list;
+
+   while (current != NULL) {
+      DoublyLinkedList *next = current->next;
+
+      if (sorted == NULL || strcmp(sorted->str, current->str) >= 0) {
+         current->next = sorted;
+
+         if (sorted != NULL) sorted->previous = current;
+
+         sorted = current;
+         sorted->previous = NULL;
+
+      } else {
+         DoublyLinkedList *current_sorted = sorted;
+
+         while (current_sorted->next != NULL && strcmp(current_sorted->next->str, current->str) < 0) {
+            current_sorted = current_sorted->next;
+         }
+
+         current->next = current_sorted->next;
+
+         if (current_sorted->next != NULL)
+            current_sorted->next->previous = current;
+
+            current_sorted->next = current;
+            current->previous = current_sorted;
+      }
+      current = next;
+   }
+   *list = sorted; // return
 }
 
 void sort_min_to_max(DoublyLinkedList **list, int reverse) {
-   if (list != NULL && *list != NULL) {
-      DoublyLinkedList *end = *list; 
-      while (end->next != NULL) {
-         end = end->next;
+   if (*list == NULL) return;
+   DoublyLinkedList *sorted = NULL;
+   DoublyLinkedList *current = *list;
+
+   while (current != NULL) {
+      DoublyLinkedList *next = current->next;
+      int curr_str_len = (current->str != NULL) ? strlen(current->str) : 0;
+      int sorted_str_len = (sorted && (sorted->str != NULL)) ? strlen(sorted->str) : 0;
+
+      int reverse_direction = reverse ? (sorted_str_len <= curr_str_len) : (sorted_str_len >= curr_str_len);
+      if (sorted == NULL || reverse_direction) {
+         current->next = sorted;
+
+         if (sorted != NULL) sorted->previous = current;
+
+         sorted = current;
+         sorted->previous = NULL;
+
+      } else {
+         DoublyLinkedList *current_sorted = sorted;
+         int curr_str_len = current->str != NULL ? strlen(current->str) : 0;
+         int current_sorted_next_str_len = (current_sorted->next && current_sorted->next->str) ? strlen(current_sorted->next->str) : 0;
+
+         if (reverse) {
+            while (current_sorted->next != NULL && current_sorted_next_str_len > curr_str_len) {
+               current_sorted = current_sorted->next;
+            }
+         } else {
+            while (current_sorted->next != NULL && current_sorted_next_str_len < curr_str_len) {
+               current_sorted = current_sorted->next;
+            }
+         }
+
+         current->next = current_sorted->next;
+
+         if (current_sorted->next != NULL)
+            current_sorted->next->previous = current;
+
+            current_sorted->next = current;
+            current->previous = current_sorted;
       }
-
-      rec_quicksort(*list, end);
+      current = next;
    }
-
+   *list = sorted; // return
 }
 
 
@@ -101,53 +162,30 @@ int main() {
    assert(list != NULL);
    assert(list->next != NULL);
 
-   insert_element(&list, "second");
+   insert_element(&list, "clarify");
+   insert_element(&list, "duke");
+   insert_element(&list, "green");
+   insert_element(&list, "abolish");
+   insert_element(&list, "recession");
+   insert_element(&list, "apparatus");
+   insert_element(&list, "turn");
+   insert_element(&list, "thumb");
+   insert_element(&list, "rise");
+   insert_element(&list, "progressive");
    assert(list != NULL);
 
+   printf("Min to max:\n");
    sort_min_to_max(&list, 0);
-
    print_list(list);
+
+   printf("\nMax to min:\n");
+   sort_min_to_max(&list, 1);
+   print_list(list);
+
+   printf("\nAlphabetical:\n");
+   sort_alphabet(&list);
+   print_list(list);
+
    destroyList(&list);
-
    return 0;
-}
-
-
-
-DoublyLinkedList* sort(DoublyLinkedList *start, DoublyLinkedList *end) {
-    // Base element
-    int base_str = strlen(end->str);
-
-    // Starting point
-    DoublyLinkedList *i = start->previous;
-
-    // Sorting
-   for (DoublyLinkedList *j = start; j != end; j = j->next) {
-      if (strlen(j->str) < base_str) {
-            i = (i == NULL) ? start : i->next;
-            swap(i, j);
-      }
-   }
-
-    // New base
-    i = (i == NULL) ? start : i->next;
-    swap(i, end);
-    return i;
-
-}
-
-void rec_quicksort(DoublyLinkedList *start, DoublyLinkedList *end) {
-    // If more than 1 element
-    if (start != end && start != NULL && end != NULL) {
-
-        // Sort + return new base
-        DoublyLinkedList *base = sort(start, end);
-
-         // Recursion for left and right side of base element
-         if(base != NULL) {
-            if (base->previous != NULL) rec_quicksort(start, base->previous);
-            if (base->next != NULL) rec_quicksort(base->next, end);
-         }
-        
-    }
 }
