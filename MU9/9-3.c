@@ -46,7 +46,7 @@ void printStack(Stack *stack) {
          double y = stack->points[i].y;
          double distance = getDistance(zero, stack->points[i]);
 
-         printf("%d Point (%.2f, %.2f), Distance to (0, 0): %f\n", i + 1, x, y, distance);
+         printf("%d Point (%.2f, %.2f), distance from point to (0, 0) => %f\n", i + 1, x, y, distance);
       }
    }
 }
@@ -116,9 +116,10 @@ void destroyStack(Stack *stack) {
 int main() {
    Stack stack;
    initStack(&stack);
+
    srand(time(NULL));
 
-   top(NULL);
+   // top(NULL);
 
    for (int i = 0; i < 5; ++i) {
       // 100 / 0.01 = 10 000

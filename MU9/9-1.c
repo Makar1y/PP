@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
 
 
 typedef struct {
@@ -38,7 +39,7 @@ int main() {
 
     // d)
     double distance = getDistance(createPoint(2.0, -3.0), createPoint(-4.0, 5.0));
-    // printf("%.2f", distance);
+    assert(distance == 10);
     
     return 0;
 }

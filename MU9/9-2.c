@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
-#define SIZE_PART 1
+#define SIZE_PART 5
 
 typedef struct {
    int *ptr;
@@ -82,28 +83,26 @@ void destroyStack(Stack *stack) {
 
 int main() {
    Stack stack;
-
    initStack(&stack);
 
    push(&stack, 25);
-
-   printf("Stack size after first push: %d\n", getStackSize(&stack));
-
-   printf("Top: %d\n", top(&stack));
+   assert(getStackSize(&stack) == 1);
+   assert(top(&stack) == 25);
 
    push(&stack, -45);
-
+   assert(getStackSize(&stack) == 2);
    printStack(&stack);
 
-   printf("Pop: %d\n", pop(&stack));
+   assert(pop(&stack) == -45);
 
-   printf("Stack size after pop: %d\n", getStackSize(&stack));
-   printf("Top: %d\n", top(&stack));
+   assert(getStackSize(&stack) == 1);
+   assert(top(&stack) == 25);
+   assert(getStackSize(&stack) == 1);
 
    destroyStack(&stack);
-
-   printf("Stack size after destroy: %d", getStackSize(&stack));
+   assert(getStackSize(&stack) == 0);
    printStack(&stack);
 
+   printf("\n(0^0)");
    return 0;
 }

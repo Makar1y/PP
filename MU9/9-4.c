@@ -20,8 +20,7 @@ Point createPoint(double x, double y) {
     Point result = {x, y};
     return result;
 }
-//                            ^        ^
-// -------------------------- | POINTS | ---------------------------
+// -------------------------- | POINTS END | ---------------------------
 
 typedef struct List {
    Point value;
@@ -43,7 +42,7 @@ List *createList(Point value) {
 void printList(List *list) {
    if (list != NULL) {
       printPoint(list->value);
-      printf(" ");
+      printf("\n");
       printList(list->next);
    }
 }
@@ -106,17 +105,21 @@ void destroyList(List **list){
 int main() {
    srand(time(NULL));
    List *list = createList(createPoint(1, 5.123));
-   assert(1 == getListSize(list));
+   Point test;
 
-   printf("printList: ");
-   printList(list);
+   assert(1 == getListSize(list));
 
    insertElement(&list, createPoint(5, 5));
    assert(2 == getListSize(list));
 
-   printf("\ngetElement: "); printPoint(getElement(list));
-   printf("\ndeleteElement: "); printPoint(deleteElement(&list));
-   assert(1 == getListSize(list));
+   test = getElement(list);
+   assert(test.x == 5 && test.y == 5);
+
+   test = deleteElement(&list);
+   assert(test.x == 5 && test.y == 5);
+
+   test = getElement(list);
+   assert(test.x == 1 && test.y == 5.123);
 
    for (int i = 0; i < 10; ++i) {
       double x = -50 + (rand() % 10001) * 0.01;
@@ -125,7 +128,7 @@ int main() {
    }
    assert(11 == getListSize(list));
 
-   printf("\nprintList: ");
+   printf("\nprintList:\n");
    printList(list);
 
    destroyList(&list);
