@@ -1,2 +1,5 @@
-Prognozė buvo per daug abejotina, užtruko ne tiek daug laiko ir nebuvo padaryta daug klaidų. Matomas progresas.
-Programa buvo parašyta be tarpinio testavimo (testavimas buvo atliktas tik pabaigoje). Iš tiesų geriau rašyti testus, o tada programą, bet šiuo atveju tai nėra labai efektyvu, nebent mokymosi tikslais.
+Planuojama skirti ne daugiau 5 valandu, ir sutkti iki 10-15 klaidu.
+
+Rezultatas: laiko - 121 min., klaidos - 5
+
+Prognozė buvo per daug abejotina, užtruko ne tiek daug laiko ir nebuvo padaryta tiek daug klaidų.
