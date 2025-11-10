@@ -1,11 +1,11 @@
-# 0 "file.c"
+# 0 "11-3.c"
 # 0 "<built-in>"
 # 0 "<command-line>"
-# 1 "file.c"
-# 1 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 1 3
-# 9 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 3
-# 1 "D:/Programs/MSYSS2/ucrt64/include/corecrt_stdio_config.h" 1 3
-# 10 "D:/Programs/MSYSS2/ucrt64/include/corecrt_stdio_config.h" 3
+# 1 "11-3.c"
+# 1 "D:/Programs/MSYSS2/ucrt64/include/time.h" 1 3
+# 9 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/crtdefs.h" 1 3
+# 10 "D:/Programs/MSYSS2/ucrt64/include/crtdefs.h" 3
 # 1 "D:/Programs/MSYSS2/ucrt64/include/corecrt.h" 1 3
 # 10 "D:/Programs/MSYSS2/ucrt64/include/corecrt.h" 3
 # 1 "D:/Programs/MSYSS2/ucrt64/include/_mingw.h" 1 3
@@ -166,12 +166,300 @@ typedef struct threadlocaleinfostruct {
 } threadlocinfo;
 # 501 "D:/Programs/MSYSS2/ucrt64/include/corecrt.h" 3
 #pragma pack(pop)
-# 11 "D:/Programs/MSYSS2/ucrt64/include/corecrt_stdio_config.h" 2 3
+# 11 "D:/Programs/MSYSS2/ucrt64/include/crtdefs.h" 2 3
+# 10 "D:/Programs/MSYSS2/ucrt64/include/time.h" 2 3
+# 25 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 1 3
+# 15 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 3
+#pragma pack(push,_CRT_PACKING)
+# 53 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 3
+  struct __timeb32 {
+    __time32_t time;
+    unsigned short millitm;
+    short timezone;
+    short dstflag;
+  };
+
+
+  struct timeb {
+    time_t time;
+    unsigned short millitm;
+    short timezone;
+    short dstflag;
+  };
+
+
+  struct __timeb64 {
+    __time64_t time;
+    unsigned short millitm;
+    short timezone;
+    short dstflag;
+  };
+
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _ftime64(struct __timeb64 *_Time);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _ftime32(struct __timeb32 *_Time);
+# 89 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 3
+struct _timespec32 {
+  __time32_t tv_sec;
+  long tv_nsec;
+};
+
+struct _timespec64 {
+  __time64_t tv_sec;
+  long tv_nsec;
+};
+
+
+
+struct timespec {
+  time_t tv_sec;
+  long tv_nsec;
+};
+
+struct itimerspec {
+  struct timespec it_interval;
+  struct timespec it_value;
+};
+
+
+
+
+  void __attribute__((__cdecl__)) ftime (struct timeb *) __asm__("_ftime64");
+# 124 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 3
+#pragma pack(pop)
+
+# 1 "D:/Programs/MSYSS2/ucrt64/include/sec_api/sys/timeb_s.h" 1 3
+# 10 "D:/Programs/MSYSS2/ucrt64/include/sec_api/sys/timeb_s.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 1 3
+# 11 "D:/Programs/MSYSS2/ucrt64/include/sec_api/sys/timeb_s.h" 2 3
 
 
 
 
 
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ftime32_s(struct __timeb32 *_Time);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ftime64_s(struct __timeb64 *_Time);
+# 127 "D:/Programs/MSYSS2/ucrt64/include/sys/timeb.h" 2 3
+# 26 "D:/Programs/MSYSS2/ucrt64/include/time.h" 2 3
+
+#pragma pack(push,_CRT_PACKING)
+# 63 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  typedef long clock_t;
+# 100 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  struct tm {
+    int tm_sec;
+    int tm_min;
+    int tm_hour;
+    int tm_mday;
+    int tm_mon;
+    int tm_year;
+    int tm_wday;
+    int tm_yday;
+    int tm_isdst;
+  };
+# 119 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __daylight(void);
+  __attribute__ ((__dllimport__)) long *__attribute__((__cdecl__)) __dstbias(void);
+  __attribute__ ((__dllimport__)) long *__attribute__((__cdecl__)) __timezone(void);
+  __attribute__ ((__dllimport__)) char **__attribute__((__cdecl__)) __tzname(void);
+# 138 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_daylight(int *_Daylight);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_dstbias(long *_Daylight_savings_bias);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_timezone(long *_Timezone);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_tzname(size_t *_ReturnValue,char *_Buffer,size_t _SizeInBytes,int _Index);
+  char *__attribute__((__cdecl__)) asctime(const struct tm *_Tm) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) asctime_s (char *_Buf,size_t _SizeInWords,const struct tm *_Tm);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ctime32(const __time32_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _ctime32_s (char *_Buf,size_t _SizeInBytes,const __time32_t *_Time);
+  clock_t __attribute__((__cdecl__)) clock(void);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _difftime32(__time32_t _Time1,__time32_t _Time2);
+  __attribute__ ((__dllimport__)) struct tm *__attribute__((__cdecl__)) _gmtime32(const __time32_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _gmtime32_s (struct tm *_Tm,const __time32_t *_Time);
+  __attribute__ ((__dllimport__)) struct tm *__attribute__((__cdecl__)) _localtime32(const __time32_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _localtime32_s (struct tm *_Tm,const __time32_t *_Time);
+  size_t __attribute__((__cdecl__)) strftime(char * __restrict__ _Buf,size_t _SizeInBytes,const char * __restrict__ _Format,const struct tm * __restrict__ _Tm) __attribute__((__format__ (gnu_strftime, 3, 0)));
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _strftime_l(char * __restrict__ _Buf,size_t _Max_size,const char * __restrict__ _Format,const struct tm * __restrict__ _Tm,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strdate(char *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _strdate_s (char *_Buf,size_t _SizeInBytes);
+ 
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _strtime(char *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _strtime_s (char *_Buf ,size_t _SizeInBytes);
+ 
+  __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _time32(__time32_t *_Time);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _timespec32_get(struct _timespec32 *_Ts, int _Base);
+
+  __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _mktime32(struct tm *_Tm);
+  __attribute__ ((__dllimport__)) __time32_t __attribute__((__cdecl__)) _mkgmtime32(struct tm *_Tm);
+
+
+  void __attribute__((__cdecl__)) tzset(void) ;
+
+
+
+
+
+  void __attribute__((__cdecl__)) _tzset(void);
+
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _difftime64(__time64_t _Time1,__time64_t _Time2);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ctime64(const __time64_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _ctime64_s (char *_Buf,size_t _SizeInBytes,const __time64_t *_Time);
+  __attribute__ ((__dllimport__)) struct tm *__attribute__((__cdecl__)) _gmtime64(const __time64_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _gmtime64_s (struct tm *_Tm,const __time64_t *_Time);
+  __attribute__ ((__dllimport__)) struct tm *__attribute__((__cdecl__)) _localtime64(const __time64_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _localtime64_s (struct tm *_Tm,const __time64_t *_Time);
+  __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _mktime64(struct tm *_Tm);
+  __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _mkgmtime64(struct tm *_Tm);
+  __attribute__ ((__dllimport__)) __time64_t __attribute__((__cdecl__)) _time64(__time64_t *_Time);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _timespec64_get(struct _timespec64 *_Ts, int _Base);
+
+  unsigned __attribute__((__cdecl__)) _getsystime(struct tm *_Tm);
+  unsigned __attribute__((__cdecl__)) _setsystime(struct tm *_Tm,unsigned _MilliSec);
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wasctime(const struct tm *_Tm);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wasctime_s (wchar_t *_Buf,size_t _SizeInWords,const struct tm *_Tm);
+  wchar_t *__attribute__((__cdecl__)) _wctime32(const __time32_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime32_s (wchar_t *_Buf,size_t _SizeInWords,const __time32_t *_Time);
+  size_t __attribute__((__cdecl__)) wcsftime(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsftime_l(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wstrdate(wchar_t *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrdate_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wstrtime(wchar_t *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrtime_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wctime64(const __time64_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime64_s (wchar_t *_Buf,size_t _SizeInWords,const __time64_t *_Time);
+
+
+
+
+  wchar_t *__attribute__((__cdecl__)) _wctime(const time_t *_Time) __asm__("_wctime64") ;
+# 219 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  errno_t __attribute__((__cdecl__)) _wctime_s (wchar_t *_Buffer,size_t _SizeInWords,const time_t *_Time) __asm__("_wctime64_s");
+# 245 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+time_t __attribute__((__cdecl__)) time(time_t *_Time) __asm__("_time64");
+
+int __attribute__((__cdecl__)) timespec_get(struct timespec* _Ts, int _Base) __asm__("_timespec64_get");
+
+double __attribute__((__cdecl__)) difftime(time_t _Time1,time_t _Time2) __asm__("_difftime64");
+struct tm *__attribute__((__cdecl__)) localtime(const time_t *_Time) __asm__("_localtime64");
+errno_t __attribute__((__cdecl__)) localtime_s(struct tm *_Tm,const time_t *_Time) __asm__("_localtime64_s");
+struct tm *__attribute__((__cdecl__)) gmtime(const time_t *_Time) __asm__("_gmtime64");
+errno_t __attribute__((__cdecl__)) gmtime_s(struct tm *_Tm, const time_t *_Time) __asm__("_gmtime64_s");
+char *__attribute__((__cdecl__)) ctime(const time_t *_Time) __asm__("_ctime64");
+errno_t __attribute__((__cdecl__)) ctime_s(char *_Buf,size_t _SizeInBytes,const time_t *_Time) __asm__("_ctime64_s");
+time_t __attribute__((__cdecl__)) mktime(struct tm *_Tm) __asm__("_mktime64");
+time_t __attribute__((__cdecl__)) _mkgmtime(struct tm *_Tm) __asm__("_mkgmtime64");
+# 274 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+  __attribute__ ((__dllimport__)) extern int daylight __attribute__ ((__deprecated__("Only provided for source compatibility; this variable might " "not always be accurate when linking to UCRT.")));
+  __attribute__ ((__dllimport__)) extern long timezone __attribute__ ((__deprecated__("Only provided for source compatibility; this variable might " "not always be accurate when linking to UCRT.")));
+  __attribute__ ((__dllimport__)) extern char *tzname[2] __attribute__ ((__deprecated__("Only provided for source compatibility; this variable might " "not always be accurate when linking to UCRT.")));
+  void __attribute__((__cdecl__)) tzset(void) ;
+
+
+# 1 "D:/Programs/MSYSS2/ucrt64/include/_timeval.h" 1 3
+# 10 "D:/Programs/MSYSS2/ucrt64/include/_timeval.h" 3
+struct timeval
+{
+ long tv_sec;
+ long tv_usec;
+};
+# 281 "D:/Programs/MSYSS2/ucrt64/include/time.h" 2 3
+
+
+
+struct timezone {
+  int tz_minuteswest;
+  int tz_dsttime;
+};
+
+  extern int __attribute__((__cdecl__)) mingw_gettimeofday (struct timeval *p, struct timezone *z);
+
+
+#pragma pack(pop)
+# 323 "D:/Programs/MSYSS2/ucrt64/include/time.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/pthread_time.h" 1 3
+# 27 "D:/Programs/MSYSS2/ucrt64/include/pthread_time.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/pthread_compat.h" 1 3
+# 78 "D:/Programs/MSYSS2/ucrt64/include/pthread_compat.h" 3
+typedef int clockid_t;
+
+
+
+
+
+typedef unsigned short mode_t;
+# 28 "D:/Programs/MSYSS2/ucrt64/include/pthread_time.h" 2 3
+# 77 "D:/Programs/MSYSS2/ucrt64/include/pthread_time.h" 3
+ int __attribute__((__cdecl__)) nanosleep32(const struct _timespec32 *request, struct _timespec32 *remain);
+ int __attribute__((__cdecl__)) nanosleep64(const struct _timespec64 *request, struct _timespec64 *remain);
+static __inline__ __attribute__((__always_inline__)) int __attribute__((__cdecl__)) nanosleep(const struct timespec *request, struct timespec *remain)
+{
+
+
+
+  return nanosleep64 ((struct _timespec64 *)request, (struct _timespec64 *)remain);
+
+}
+
+ int __attribute__((__cdecl__)) clock_nanosleep32(clockid_t clock_id, int flags, const struct _timespec32 *request, struct _timespec32 *remain);
+ int __attribute__((__cdecl__)) clock_nanosleep64(clockid_t clock_id, int flags, const struct _timespec64 *request, struct _timespec64 *remain);
+static __inline__ __attribute__((__always_inline__)) int __attribute__((__cdecl__)) clock_nanosleep(clockid_t clock_id, int flags, const struct timespec *request, struct timespec *remain)
+{
+
+
+
+  return clock_nanosleep64 (clock_id, flags, (struct _timespec64 *)request, (struct _timespec64 *)remain);
+
+}
+
+ int __attribute__((__cdecl__)) clock_getres32(clockid_t clock_id, struct _timespec32 *res);
+ int __attribute__((__cdecl__)) clock_getres64(clockid_t clock_id, struct _timespec64 *res);
+static __inline__ __attribute__((__always_inline__)) int __attribute__((__cdecl__)) clock_getres(clockid_t clock_id, struct timespec *res)
+{
+
+
+
+  return clock_getres64 (clock_id, (struct _timespec64 *)res);
+
+}
+
+ int __attribute__((__cdecl__)) clock_gettime32(clockid_t clock_id, struct _timespec32 *tp);
+ int __attribute__((__cdecl__)) clock_gettime64(clockid_t clock_id, struct _timespec64 *tp);
+static __inline__ __attribute__((__always_inline__)) int __attribute__((__cdecl__)) clock_gettime(clockid_t clock_id, struct timespec *tp)
+{
+
+
+
+  return clock_gettime64 (clock_id, (struct _timespec64 *)tp);
+
+}
+
+ int __attribute__((__cdecl__)) clock_settime32(clockid_t clock_id, const struct _timespec32 *tp);
+ int __attribute__((__cdecl__)) clock_settime64(clockid_t clock_id, const struct _timespec64 *tp);
+static __inline__ __attribute__((__always_inline__)) int __attribute__((__cdecl__)) clock_settime(clockid_t clock_id, const struct timespec *tp)
+{
+
+
+
+  return clock_settime64 (clock_id, (struct _timespec64 *)tp);
+
+}
+# 324 "D:/Programs/MSYSS2/ucrt64/include/time.h" 2 3
+# 2 "11-3.c" 2
+# 1 "D:/Programs/MSYSS2/ucrt64/include/assert.h" 1 3
+# 24 "D:/Programs/MSYSS2/ucrt64/include/assert.h" 3
+__attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) _wassert(const wchar_t *_Message,const wchar_t *_File,unsigned _Line);
+__attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) _assert (const char *_Message, const char *_File, unsigned _Line);
+# 3 "11-3.c" 2
+# 1 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 1 3
+# 9 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 3
+# 1 "D:/Programs/MSYSS2/ucrt64/include/corecrt_stdio_config.h" 1 3
+# 16 "D:/Programs/MSYSS2/ucrt64/include/corecrt_stdio_config.h" 3
 unsigned long long* __attribute__((__cdecl__)) __local_stdio_printf_options(void);
 unsigned long long* __attribute__((__cdecl__)) __local_stdio_scanf_options(void);
 # 10 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 2 3
@@ -1505,7 +1793,7 @@ void __attribute__((__cdecl__)) __mingw_str_free(void *ptr);
 # 912 "D:/Programs/MSYSS2/ucrt64/include/sec_api/stdio_s.h" 3
   __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _fread_nolock_s(void *_DstBuf,size_t _DstSize,size_t _ElementSize,size_t _Count,FILE *_File);
 # 1349 "D:/Programs/MSYSS2/ucrt64/include/stdio.h" 2 3
-# 2 "file.c" 2
+# 4 "11-3.c" 2
 # 1 "D:/Programs/MSYSS2/ucrt64/include/stdlib.h" 1 3
 # 10 "D:/Programs/MSYSS2/ucrt64/include/stdlib.h" 3
 # 1 "D:/Programs/MSYSS2/ucrt64/include/corecrt_wstdlib.h" 1 3
@@ -1557,13 +1845,6 @@ void __attribute__((__cdecl__)) __mingw_str_free(void *ptr);
 # 1 "D:/Programs/MSYSS2/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h" 1 3 4
 # 210 "D:/Programs/MSYSS2/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h" 3 4
 # 1 "D:/Programs/MSYSS2/ucrt64/include/limits.h" 1 3 4
-
-
-
-
-
-# 1 "D:/Programs/MSYSS2/ucrt64/include/crtdefs.h" 1 3 4
-# 7 "D:/Programs/MSYSS2/ucrt64/include/limits.h" 2 3 4
 # 211 "D:/Programs/MSYSS2/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h" 2 3 4
 # 10 "D:/Programs/MSYSS2/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h" 2 3 4
 #pragma GCC diagnostic pop
@@ -1960,13 +2241,6 @@ unsigned long __attribute__((__cdecl__)) _lrotr(unsigned long,int);
 
 
   __extension__ long long __attribute__((__cdecl__)) atoll (const char *);
-
-
-  __extension__ long long __attribute__((__cdecl__)) wtoll (const wchar_t *);
-  __extension__ char *__attribute__((__cdecl__)) lltoa (long long, char *, int);
-  __extension__ char *__attribute__((__cdecl__)) ulltoa (unsigned long long , char *, int);
-  __extension__ wchar_t *__attribute__((__cdecl__)) lltow (long long, wchar_t *, int);
-  __extension__ wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long, wchar_t *, int);
 # 714 "D:/Programs/MSYSS2/ucrt64/include/stdlib.h" 3
 #pragma pack(pop)
 
@@ -2149,32 +2423,114 @@ _mm_free (void *__aligned_ptr)
 # 264 "D:/Programs/MSYSS2/ucrt64/include/malloc.h" 3
 #pragma pack(pop)
 # 718 "D:/Programs/MSYSS2/ucrt64/include/stdlib.h" 2 3
-# 3 "file.c" 2
+# 5 "11-3.c" 2
+
+# 1 "file.h" 1
 
 
-# 4 "file.c"
-int saveCount;
-int loadCount;
 
-int saveToFile(FILE *file, const int *array, const size_t size) {
-   if (file && array)
-      if (size > 0 && fwrite(&size, sizeof(size_t), 1, file))
-         if (fwrite(array, sizeof(int), size, file)){
-            ++saveCount;
-            return 1;
-         }
-   return 0;
+
+
+# 5 "file.h"
+extern int saveCount;
+extern int loadCount;
+
+
+
+
+
+
+extern int saveToFile(FILE *file, const int *array, const size_t size);
+
+
+
+
+
+extern int loadFromFile(FILE *file, int *array);
+# 7 "11-3.c" 2
+
+
+
+
+
+
+
+void fillArray(int *array, size_t size, const int low, const int high) {
+   if (array) {
+      for (int i = 0; i < size; ++i) {
+         *(array + i) = (rand() % (high - low + 1) ) + low;
+      }
+   }
 }
 
-int loadFromFile(FILE *file, int *array) {
-   if (file && array) {
-      size_t size;
+void printArray(int *array, size_t size) {
+   if(array) {
+      for(size_t i = 0; i < size; ++i) {
+         printf("%d ", array[i]);
+      }
+      printf("\n");
+   }
+}
 
-      if (fread(&size, sizeof(size_t), 1, file))
-         if(fread(array, sizeof(int), size, file)) {
-            ++loadCount;
-            return 1;
-         }
+int main(void) {
+   int m1[10];
+   int m2[10];
+   int m3[10];
+   srand(time(
+# 35 "11-3.c" 3
+             ((void *)0)
+# 35 "11-3.c"
+                 ));
+
+   FILE *file1 = fopen("test1.bin", "wb");
+   FILE *file2 = fopen("test2.bin", "wb");
+
+   
+# 40 "11-3.c" 3
+  (void) ((!!(
+# 40 "11-3.c"
+  file1 && file2 && m1 && m2 && m3
+# 40 "11-3.c" 3
+  )) || (_assert(
+# 40 "11-3.c"
+  "file1 && file2 && m1 && m2 && m3"
+# 40 "11-3.c" 3
+  ,"11-3.c",40),0))
+# 40 "11-3.c"
+                                          ;
+
+   fillArray(m1, 10, 0, 10);
+   fillArray(m2, 10, 0, 10);
+   fillArray(m3, 10, 0, 10);
+
+
+
+
+
+
+   saveToFile(file1, m1, 10);
+   saveToFile(file1, m3, 10);
+
+   file1 = freopen("test1.bin", "rb", file1);
+
+   loadFromFile(file1, m1);
+   saveToFile(file2, m2, 10);
+
+   file2 = freopen("test2.bin", "rb", file2);
+
+   loadFromFile(file2, m3);
+   loadFromFile(file1, m2);
+
+
+
+
+
+
+
+   if (loadCount == 3 && saveCount == 3) {
+      printf("All good.");
+   } else {
+      printf("Something's wrong.");
    }
    return 0;
 }
