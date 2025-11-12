@@ -55,9 +55,11 @@ void addSaveCount(FILE *file) {
    
    saveCount *current = countersManager.saveCounters;
    while (current) {
-      if (file == current->file)
+      if (file == current->file) {
          ++current->count;
+         ++countersManager.saveCounterTotal;
          return;
+      }
       current = current->next;
    }
    
@@ -70,7 +72,7 @@ void addSaveCount(FILE *file) {
       ++countersManager.saveCounterTotal;
       return;
    }
-   fprintf(stderr, "Error! Cant locate memory for save file counter.");
+   fprintf(stderr, "Error! Cant locate memory for save file counter.\n");
 }
 
 void addLoadCount(FILE *file) {
@@ -78,9 +80,11 @@ void addLoadCount(FILE *file) {
    
    loadCount *current = countersManager.loadCounters;
    while (current) {
-      if (file == current->file)
+      if (file == current->file) {
          ++current->count;
+         ++countersManager.loadCounterTotal;
          return;
+      }
       current = current->next;
    }
 
