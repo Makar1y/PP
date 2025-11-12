@@ -2150,17 +2150,145 @@ _mm_free (void *__aligned_ptr)
 #pragma pack(pop)
 # 718 "D:/Programs/MSYSS2/ucrt64/include/stdlib.h" 2 3
 # 3 "file.c" 2
+# 1 "D:/Programs/MSYSS2/ucrt64/include/assert.h" 1 3
+# 24 "D:/Programs/MSYSS2/ucrt64/include/assert.h" 3
+__attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) _wassert(const wchar_t *_Message,const wchar_t *_File,unsigned _Line);
+__attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) _assert (const char *_Message, const char *_File, unsigned _Line);
+# 4 "file.c" 2
 
 
-# 4 "file.c"
-int saveCount;
-int loadCount;
+# 5 "file.c"
+typedef struct saveCount{
+   FILE *file;
+   int count;
+   struct saveCount *next;
+} saveCount;
+
+typedef struct loadCount{
+   FILE *file;
+   int count;
+   struct loadCount *next;
+} loadCount;
+
+typedef struct {
+   saveCount *saveCounters;
+   int saveCounterTotal;
+   loadCount *loadCounters;
+   long loadCounterTotal;
+} countManager;
+
+countManager countersManager = {0};
+
+
+int getSaveCount(FILE *file) {
+   if (file){
+      saveCount *current = countersManager.saveCounters;
+      while (current) {
+         if (file == current->file)
+            return current->count;
+         current = current->next;
+      }
+      return 0;
+   }
+   return countersManager.saveCounterTotal;
+}
+
+int getLoadCount(FILE *file) {
+   if (file){
+      loadCount *current = countersManager.loadCounters;
+      while (current) {
+         if (file == current->file)
+            return current->count;
+         current = current->next;
+      }
+      return 0;
+   }
+   return countersManager.loadCounterTotal;
+}
+
+void addSaveCount(FILE *file) {
+   
+# 54 "file.c" 3
+  (void) ((!!(
+# 54 "file.c"
+  file
+# 54 "file.c" 3
+  )) || (_assert(
+# 54 "file.c"
+  "file"
+# 54 "file.c" 3
+  ,"file.c",54),0))
+# 54 "file.c"
+              ;
+
+   saveCount *current = countersManager.saveCounters;
+   while (current) {
+      if (file == current->file)
+         ++current->count;
+         return;
+      current = current->next;
+   }
+   saveCount *new = malloc(sizeof(saveCount));
+   if (new){
+      new->count = 1;
+      new->file = file;
+      new->next = countersManager.saveCounters;
+      countersManager.saveCounters = new;
+      ++countersManager.saveCounterTotal;
+      return;
+   }
+   fprintf(
+# 72 "file.c" 3
+          (__acrt_iob_func(2))
+# 72 "file.c"
+                , "Error! Cant locate memory for save file counter.");
+}
+
+void addLoadCount(FILE *file) {
+   
+# 76 "file.c" 3
+  (void) ((!!(
+# 76 "file.c"
+  file
+# 76 "file.c" 3
+  )) || (_assert(
+# 76 "file.c"
+  "file"
+# 76 "file.c" 3
+  ,"file.c",76),0))
+# 76 "file.c"
+              ;
+
+   loadCount *current = countersManager.loadCounters;
+   while (current) {
+      if (file == current->file)
+         ++current->count;
+         return;
+      current = current->next;
+   }
+   loadCount *new = malloc(sizeof(loadCount));
+   if (new){
+      new->count = 1;
+      new->file = file;
+      new->next = countersManager.loadCounters;
+      countersManager.loadCounters = new;
+      ++countersManager.loadCounterTotal;
+      return;
+   }
+   fprintf(
+# 94 "file.c" 3
+          (__acrt_iob_func(2))
+# 94 "file.c"
+                , "Error! Cant locate memory for save file counter.");
+}
+
+
 
 int saveToFile(FILE *file, const int *array, const size_t size) {
    if (file && array)
       if (size > 0 && fwrite(&size, sizeof(size_t), 1, file))
          if (fwrite(array, sizeof(int), size, file)){
-            ++saveCount;
+            addSaveCount(file);
             return 1;
          }
    return 0;
@@ -2172,7 +2300,7 @@ int loadFromFile(FILE *file, int *array) {
 
       if (fread(&size, sizeof(size_t), 1, file))
          if(fread(array, sizeof(int), size, file)) {
-            ++loadCount;
+            addLoadCount(file);
             return 1;
          }
    }

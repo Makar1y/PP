@@ -66,10 +66,12 @@ int main(void) {
    // printArray(m2, SIZE);
    // printArray(m3, SIZE);
 
-
-   if (loadCount == 3 && saveCount == 3) {
+   int f1 = getSaveCount(file1) == 2 && getLoadCount(file1) == 2;
+   int f2 = getSaveCount(file2) == 1 && getLoadCount(file1) == 1;
+   if (getLoadCount(NULL) == 3 && getSaveCount(NULL) == 3 && f1 && f2) {
       printf("All good.");
    } else {
+      printf("%d", getSaveCount(NULL));
       printf("Something's wrong.");
    }
    return 0;
