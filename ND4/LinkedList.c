@@ -1,37 +1,35 @@
+#include "LinkedList.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct
-{
-   int data;
-   void *next;
-} LinkedList;
+void *create_list_with_element(const int number) {
+   linked_list *list = calloc(1, sizeof(linked_list));
+   list->data = number;
+   return list; 
+}
 
-void* create_List() {
-   return calloc(1, sizeof(LinkedList));
-};
-
-void* add_List_element(LinkedList *list, int element) {
+void *add_element_to_list(linked_list *list, const int number) {
    if (list) {
-      LinkedList *current = list;
+      linked_list *current = list;
 
       while (current->next) {
-         current = current->next;    
-      }
+         current = current->next;
+      } /* finding last element */
 
-      LinkedList *ptr = calloc(1, sizeof(LinkedList));
+      linked_list *ptr = calloc(1, sizeof(linked_list));
       if (ptr) {
          current->next = ptr;
-         ptr->data = element;
+         ptr->data = number;
          return ptr;
-      }
+      } /* create element if possible */
    }
    return NULL;
 }
-
-void destroy_List(LinkedList *list) {
-   LinkedList *current = list;
-   LinkedList *for_free = current;
+ 
+void destroy_list(linked_list *list) {
+   linked_list *current = list;
+   linked_list *for_free = current;
    while (current) {
       for_free = current;
       current = current->next;
@@ -39,9 +37,9 @@ void destroy_List(LinkedList *list) {
    }
 }
 
-void print_List(LinkedList *list) {
-   if(list) {
-      LinkedList *current = list;
+void print_list(linked_list *list) {
+   if (list) {
+      linked_list *current = list;
 
       while (current) {
          printf("%d ", current->data);

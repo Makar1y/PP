@@ -1,17 +1,18 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef linked_list_h
+#define linked_list_h
 
-typedef struct
-{
+struct list_struct {
    int data;
-   void *next;
-} LinkedList;
+   struct list_struct *next;
+};
 
-void* create_List();
+typedef struct list_struct linked_list;
 
-void* add_List_element(LinkedList *list, int element);
+void *create_list_with_element(int number);
 
-void destroy_List(LinkedList *list);
+void *add_element_to_list(linked_list *list, int number);
 
-void print_List(LinkedList *list);
+void destroy_list(linked_list *list_head);
+
+void print_list(linked_list *list_head);
 #endif
