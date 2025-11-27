@@ -148,6 +148,14 @@ For the C++ coding standards click <a href="CppCodingStandard.html">here</a>
     <LI><A href="#nodef">No 
     Data Definitions in Header Files </A>
     </UL>
+  </UL>
+ <LI><A href="#additional"><B>Additional Rules</B></A>
+     <UL>
+     <LI><A href="#memory">Memory Management</A>
+     <LI><A href="#typedefs">Typedefs</A>
+     <LI><A href="#strongtyping">Return type</A>
+     <LI><A href="#includes">Include Ordering</A>
+     </UL>
   </OL>
 
 <HR>
@@ -1046,5 +1054,48 @@ you know if this matters for your application.
 <P>
 
   </h4>
+
+  </UL>
+<HR>
+<A name=additional></A>
+<H1>Additional Rules</H1>
+
+<A name=memory></A>
+<H2>Memory Management</H2>
+<UL>
+  <LI>Functions/modules that allocate memory for complex data structures (e.g., structs, lists) must have a corresponding deallocation function.
+  <LI>The caller is responsible for ensuring the deallocation function is called when the object is no longer needed.
+  <LI>Avoid hidden allocations where possible. Documentation must explicitly state if a function allocates new memory.
+</UL>
+
+<A name=typedefs></A>
+<H2>Typedefs</H2>
+<UL>
+  <LI>Typedefs for structures should follow the <I>snake_case</I> convention to match the existing structs.
+  <LI>Avoid hiding pointers behind typedefs unless the type is an opaque handle.
+</UL>
+<B>Example</B>:
+<PRE>
+typedef struct foo boo; // Good
+typedef struct foo *boo; // Avoid
+</PRE>
+
+<A name=strongtyping></A>
+<H2>Strong return types</H2>
+<UL>
+  <LI>Do not use <I>void *</I> for return types or parameters when the specific type is known.
+  <LI>Use <I>void *</I> only for truly generic data containers where the data type is not known at compile time.
+</UL>
+
+<A name=includes></A>
+<H2>Include Ordering</H2>
+<UL>
+  <LI>Include headers in the following order to ensure self-containment and prevent dependency issues:
+  <OL>
+    <LI>System headers
+    <LI>Third-party
+    <LI>Local project headers
+  </OL>
+</UL>
 
   </BODY></HTML>
