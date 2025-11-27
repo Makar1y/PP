@@ -7,7 +7,7 @@
 #define TEST_SIZE 10
 
 
-void reverse_list(linked_list **list) {
+void reverse_list(linked_list ** list) {
    if (list && (*list)->next) {
       linked_list *previous = NULL;
       linked_list *current = *list;

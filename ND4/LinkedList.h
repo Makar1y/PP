@@ -8,9 +8,9 @@ struct list_struct {
 
 typedef struct list_struct linked_list;
 
-void *create_list_with_element(int number);
+linked_list *create_list_with_element(const int number);
 
-void *add_element_to_list(linked_list *list, int number);
+linked_list *add_element_to_list(linked_list *list, const int number);
 
 void destroy_list(linked_list *list_head);
 

@@ -1,15 +1,15 @@
-#include "LinkedList.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 
-void *create_list_with_element(const int number) {
+#include "LinkedList.h"
+
+linked_list *create_list_with_element(const int number) {
    linked_list *list = calloc(1, sizeof(linked_list));
    list->data = number;
-   return list; 
+   return list;
 }
 
-void *add_element_to_list(linked_list *list, const int number) {
+linked_list *add_element_to_list(linked_list *list, const int number) {
    if (list) {
       linked_list *current = list;
 
