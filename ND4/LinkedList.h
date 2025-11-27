@@ -5,9 +5,9 @@ struct list_struct {
    int data;
    struct list_struct *next;
 };
-
 typedef struct list_struct linked_list;
 
+/// @brief This function use dynamic memory, call destroy_list to free allocated memory.
 linked_list *create_list_with_element(const int number);
 
 linked_list *add_element_to_list(linked_list *list, const int number);
