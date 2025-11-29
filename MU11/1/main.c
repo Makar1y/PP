@@ -6,7 +6,7 @@
 #include "file.h"
 #include "file.h"
 
-#define SIZE 10
+#define SIZE 21
 #define FILENAME "test.bin"
 
 
