@@ -46,6 +46,7 @@ int main() {
    int test_array[ARRAY_SIZE];
    int result_array[ARRAY_SIZE];
    fill_array(test_array, ARRAY_SIZE, LOW_BOUND, HIGH_BOUND);
+   is_sorted(test_array, ARRAY_SIZE);
 
    // Burble
    copy_array(test_array, ARRAY_SIZE, result_array);
@@ -54,7 +55,7 @@ int main() {
 
    // Quicksort
    copy_array(test_array, ARRAY_SIZE, result_array);
-   quicksort(test_array, 0, ARRAY_SIZE);
+   quicksort(result_array, 0, ARRAY_SIZE - 1);
    print_res("Quicksort", is_sorted(result_array, ARRAY_SIZE));
 
    return 0;

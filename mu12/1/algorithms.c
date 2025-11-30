@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 void burble(int *array, size_t arr_size) {
    if (array) {
@@ -6,7 +7,7 @@ void burble(int *array, size_t arr_size) {
 
       do {
          swapped = 0;
-         for (int i = 0; i < arr_size-1; ++i) {
+         for (int i = 0; i < arr_size - 1; ++i) {
             if (array[i] > array[i + 1]) {
                int tmp = array[i];
                array[i] = array[i + 1];
@@ -19,30 +20,35 @@ void burble(int *array, size_t arr_size) {
 }
 
 
-
-int partition(int *array, size_t low, size_t high) {
-   int pivot = low;
-
-   int i = low - 1;
-   int j = high + 1;
-
-   while (1) {
-      do ++i; while (array[i] < array[pivot]);
-
-      do --j; while (array[j] > array[pivot]);
-
-      if (i >= j) return j;
-
-      int tmp = array[i];
-      array[i] = array[j];
-      array[j] = tmp;
-   }
+// TODO add to snippets
+void swap(int *a, int *b) {
+   int tmp = *a;
+   *a = *b;
+   *b = tmp;
 }
 
-int quicksort(int *array, size_t low, size_t high) {
-   if (low >= 0 && high >= 0 && low < high) {
+int partition(int *array, int low, int high) {
+   // int mid = low + (high - low) / 2; TODO median of three
+   // swap(&array[mid], &array[high]);
+   int pivot = array[high];
+   int i = low - 1;
+   
+   for (int j = low; j < high; ++j) {
+      if (array[j] < pivot) {
+         ++i;
+         swap(array + i, array + j);
+      }
+   }
+   ++i;
+   swap(array + i, array + high);
+   return i;
+}
+
+void quicksort(int *array, int low, int high) {
+   if (low < high) {
       int pivot = partition(array, low, high);
-      quicksort(array, low, pivot);
+      
       quicksort(array, pivot + 1, high);
+      quicksort(array, low, pivot - 1);
    }
 }
