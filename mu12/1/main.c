@@ -1,11 +1,18 @@
 #include <stdio.h>
-#include <assert.h>
+#include <time.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "algorithms.h"
 
 #define ARRAY_SIZE 10
 #define LOW_BOUND 0
 #define HIGH_BOUND 100
 
 
+void print_res(char *name, int result) {
+   printf(" %10s %3.1d\n", name, result);
+}
 
 void fill_array(int *array, const size_t size, const int low, const int high) {
    if (array)
@@ -16,10 +23,12 @@ void fill_array(int *array, const size_t size, const int low, const int high) {
 /// @return 1 if sorted, 0 if not, -1 if incorrect parameters
 int is_sorted(int *array, const size_t size) {
    if (array && size > 1)
-      for (size_t i = 0; i < size; ++i)
+      for (size_t i = 0; i < size; ++i) {
+         // printf("%d ", array[i]);
          for (int j = i + 1; j < size; ++j)
-            if (i > j)
+            if (array[i] > array[j])
                return 0;
+      }
       return 1;
    return -1;
 }
@@ -36,13 +45,17 @@ int main() {
    srand(time(NULL));
    int test_array[ARRAY_SIZE];
    int result_array[ARRAY_SIZE];
-
    fill_array(test_array, ARRAY_SIZE, LOW_BOUND, HIGH_BOUND);
+
+   // Burble
    copy_array(test_array, ARRAY_SIZE, result_array);
+   burble(result_array, ARRAY_SIZE);
+   print_res("Burble", is_sorted(result_array, ARRAY_SIZE));
 
-   
+   // Quicksort
+   copy_array(test_array, ARRAY_SIZE, result_array);
+   quicksort(test_array, 0, ARRAY_SIZE);
+   print_res("Quicksort", is_sorted(result_array, ARRAY_SIZE));
 
-   
-   printf("Hello world");
    return 0;
 }
