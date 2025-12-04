@@ -50,7 +50,7 @@ int main() {
 
    // Burble
    copy_array(test_array, ARRAY_SIZE, result_array);
-   burble(result_array, ARRAY_SIZE);
+   burble_sort(result_array, ARRAY_SIZE);
    print_res("Burble", is_sorted(result_array, ARRAY_SIZE));
 
    // Quicksort

@@ -2,8 +2,8 @@
 #define ALGORITHMS_H_
 
 
-void burble(int *array, size_t arr_size);
+void burble_sort(int *array, size_t arr_size);
 
-void quicksort(int *array, size_t low, size_t high);
+void quicksort(int *array, int low, int high);
 
 #endif
