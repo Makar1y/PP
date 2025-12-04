@@ -5,13 +5,15 @@
 
 #include "algorithms.h"
 
-#define ARRAY_SIZE 10
+#define ARRAY_SIZE 1000
 #define LOW_BOUND 0
 #define HIGH_BOUND 100
 
+#define TABLE_ELEMENT_WIDTH 10
+
 
 void print_res(char *name, int result) {
-   printf(" %10s %3.1d\n", name, result);
+   printf("| %*s | %*d |\n", TABLE_ELEMENT_WIDTH, name, TABLE_ELEMENT_WIDTH, result);
 }
 
 void fill_array(int *array, const size_t size, const int low, const int high) {
@@ -48,15 +50,38 @@ int main() {
    fill_array(test_array, ARRAY_SIZE, LOW_BOUND, HIGH_BOUND);
    is_sorted(test_array, ARRAY_SIZE);
 
-   // Burble
+   printf("| %*s | %*s |\n",
+                           TABLE_ELEMENT_WIDTH, "Algorithm", 
+                           TABLE_ELEMENT_WIDTH, "Is sorted");
+
+   for (int i = 0; i < TABLE_ELEMENT_WIDTH * 2; ++i) {
+      printf("-");
+   } printf("\n");
+
+   // Bubble  sort
    copy_array(test_array, ARRAY_SIZE, result_array);
-   burble_sort(result_array, ARRAY_SIZE);
+   bubble_sort(result_array, ARRAY_SIZE);
    print_res("Burble", is_sorted(result_array, ARRAY_SIZE));
 
    // Quicksort
    copy_array(test_array, ARRAY_SIZE, result_array);
    quicksort(result_array, 0, ARRAY_SIZE - 1);
    print_res("Quicksort", is_sorted(result_array, ARRAY_SIZE));
+
+   // Insertion sort
+   copy_array(test_array, ARRAY_SIZE, result_array);
+   insertion_sort(result_array, ARRAY_SIZE);
+   print_res("Insertion", is_sorted(result_array, ARRAY_SIZE));
+
+   // Selection sort
+   copy_array(test_array, ARRAY_SIZE, result_array);
+   selection_sort(result_array, ARRAY_SIZE);
+   print_res("Selection", is_sorted(result_array, ARRAY_SIZE));
+
+   // Merge sort
+   copy_array(test_array, ARRAY_SIZE, result_array);
+   selection_sort(result_array, ARRAY_SIZE);
+   print_res("Selection", is_sorted(result_array, ARRAY_SIZE));
 
    return 0;
 }
