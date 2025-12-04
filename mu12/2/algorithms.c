@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+long g_comparisons, g_swaps;
+
 void bubble_sort(int* array, int size) {
    int swapped, tmp;
 
@@ -13,7 +15,9 @@ void bubble_sort(int* array, int size) {
             array[i] = array[i + 1];
             array[i + 1] = tmp;
             swapped = 1;
+            ++g_swaps;
          }
+         ++g_comparisons;
       }
    } while (swapped);
 }
@@ -22,6 +26,7 @@ void swap(int* a, int* b) {
    int tmp = *a;
    *a = *b;
    *b = tmp;
+   ++g_swaps;
 }
 
 int partition(int* array, int begin, int end) {
@@ -32,6 +37,7 @@ int partition(int* array, int begin, int end) {
 
    for (int j = begin; j < end; ++j) {
       if (array[j] < pivot) {
+         ++g_comparisons;
          ++i;
          swap(array + i, array + j);
       }
@@ -59,12 +65,14 @@ void insertion_sort(int* array, int size) {
       int j = i;
 
       while (j > 0 && array[j - 1] > tmp) {
+         ++g_comparisons; ++g_swaps;
          array[j] = array[j - 1];
          --j;
       }
 
       array[j] = tmp;
       ++i;
+      ++g_swaps;
    }
 }
 
@@ -75,6 +83,7 @@ void selection_sort(int* array, int size) {
 
       for (int j = i + 1; j < size; ++j) {
          if (array[j] < min_value) {
+            ++g_comparisons;
             min = j;
             min_value = array[j];
          }
@@ -82,28 +91,30 @@ void selection_sort(int* array, int size) {
 
       int tmp = array[min] = array[i];
       array[i] = min_value;
+      ++g_swaps;
    }
 }
 
 
-void copy_array(int const *source_arr, size_t arr_size, int *destination_arr);
-// void copy_array(int const *source_arr, size_t arr_size, int *destination_arr) {
-//    if (source_arr && destination_arr)
-//       for (int i = 0; i < arr_size; ++i)
-//          destination_arr[i] = source_arr[i];
-// }
-
 void merge(int *array, int begin, int middle, int end, int *tmp_arr) {
+   for (int i = begin; i < end; ++i)
+      tmp_arr[i] = array[i];
+
    int i = begin;
    int j = middle;
 
    for (int k = begin; k < end; ++k) {
-      if (i < middle && (j >= end ||  tmp_arr[i] <= tmp_arr[j]) ) {
+      if (i < middle && (j >= end || tmp_arr[i] <= tmp_arr[j]) ) {
+         if ( !(j >= end) ) {
+            ++g_comparisons;
+         }
          array[k] = tmp_arr[i];
          ++i;
+         ++g_swaps;
       } else {
          array[k] = tmp_arr[j];
          j++;
+         ++g_swaps;
       }
    }
 }
@@ -123,6 +134,5 @@ void split(int *array, int begin, int end, int *tmp_arr) {
 void merge_sort(int* array, int size) {
    int tmp_arr[size];
 
-   copy_array(array, size, tmp_arr);
    split(array, 0, size, tmp_arr);
 }

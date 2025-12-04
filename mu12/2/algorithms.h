@@ -1,6 +1,7 @@
 #ifndef ALGORITHMS_H_
 #define ALGORITHMS_H_
 
+extern long g_comparisons, g_swaps;
 
 void bubble_sort(int *array, int size);
 

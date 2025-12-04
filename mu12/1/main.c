@@ -54,7 +54,7 @@ int main() {
                            TABLE_ELEMENT_WIDTH, "Algorithm", 
                            TABLE_ELEMENT_WIDTH, "Is sorted");
 
-   for (int i = 0; i < TABLE_ELEMENT_WIDTH * 2; ++i) {
+   for (int i = 0; i < TABLE_ELEMENT_WIDTH * 2 + 7; ++i) {
       printf("-");
    } printf("\n");
 
