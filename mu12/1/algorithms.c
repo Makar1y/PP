@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 void bubble_sort(int* array, int size) {
    int swapped, tmp;
 
@@ -85,15 +82,10 @@ void selection_sort(int* array, int size) {
    }
 }
 
-
-void copy_array(int const *source_arr, size_t arr_size, int *destination_arr);
-// void copy_array(int const *source_arr, size_t arr_size, int *destination_arr) {
-//    if (source_arr && destination_arr)
-//       for (int i = 0; i < arr_size; ++i)
-//          destination_arr[i] = source_arr[i];
-// }
-
 void merge(int *array, int begin, int middle, int end, int *tmp_arr) {
+   for (int i = begin; i < end; ++i)
+      tmp_arr[i] = array[i]; // copy array
+   
    int i = begin;
    int j = middle;
 
@@ -109,6 +101,7 @@ void merge(int *array, int begin, int middle, int end, int *tmp_arr) {
 }
 
 void split(int *array, int begin, int end, int *tmp_arr) {
+
    if (end - begin <= 1) {
       return;
    }
@@ -123,6 +116,5 @@ void split(int *array, int begin, int end, int *tmp_arr) {
 void merge_sort(int* array, int size) {
    int tmp_arr[size];
 
-   copy_array(array, size, tmp_arr);
    split(array, 0, size, tmp_arr);
 }

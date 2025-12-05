@@ -18,6 +18,8 @@
 #define REPETITIONS 10
 #define ALGORITHMS_NUM 5
 
+long long g_comparisons, g_swaps;
+
 typedef union {
    void (*quicksort)(int*, int, int);
    void (*not_quicksort)(int*, int);

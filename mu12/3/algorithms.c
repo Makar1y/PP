@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-
-// selection swaps
 long long g_comparisons, g_swaps;
 
 void bubble_sort(int* array, int size) {
