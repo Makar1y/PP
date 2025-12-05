@@ -34,7 +34,7 @@ void print_res(algorithm_results *results) {
    printf("| %*s | %*s | %*s | %*s | %*s |\n",
       TABLE_ELEMENT_WIDTH, "Algorithm",
       TABLE_ELEMENT_WIDTH, "Is sorted",
-      TABLE_ELEMENT_WIDTH, "Average time",
+      TABLE_ELEMENT_WIDTH, "Average time (s)",
       TABLE_ELEMENT_WIDTH, "Average comparisons",
       TABLE_ELEMENT_WIDTH, "Average swaps"
    );
@@ -97,7 +97,7 @@ void test_sort_algorithm(algorithm_results *results, int *array, int size) {
    results->time_total += (double)(end_time- start_time) / CLOCKS_PER_SEC;
    results->comparisons_total += g_comparisons;
    results->swaps_total += g_swaps;
-   int sorted = is_sorted(array, ARRAY_SIZE);
+   int sorted = is_sorted(array, size);
    if ( sorted < results->sorted ) {
       results->sorted = sorted;
    }
