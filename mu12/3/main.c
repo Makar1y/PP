@@ -52,18 +52,18 @@ void print_res(algorithm_results * results_normal, algorithm_results *results_re
          TABLE_ELEMENT_WIDTH, results_normal[i].name, 
          TABLE_ELEMENT_WIDTH, "Normal", 
          TABLE_ELEMENT_WIDTH, results_normal[i].sorted,
-         TABLE_ELEMENT_WIDTH, results_normal[i].time_total / REPETITIONS,
-         TABLE_ELEMENT_WIDTH, results_normal[i].comparisons_total / REPETITIONS,
-         TABLE_ELEMENT_WIDTH, results_normal[i].swaps_total / REPETITIONS
+         TABLE_ELEMENT_WIDTH, results_normal[i].time_total,
+         TABLE_ELEMENT_WIDTH, results_normal[i].comparisons_total,
+         TABLE_ELEMENT_WIDTH, results_normal[i].swaps_total
       );
 
       printf("| %-*s | %-*s | %-*d | %-*lf | %-*lld | %-*lld |\n", 
          TABLE_ELEMENT_WIDTH, "", 
          TABLE_ELEMENT_WIDTH, "Reverse", 
          TABLE_ELEMENT_WIDTH, results_revers[i].sorted,
-         TABLE_ELEMENT_WIDTH, results_revers[i].time_total / REPETITIONS,
-         TABLE_ELEMENT_WIDTH, results_revers[i].comparisons_total / REPETITIONS,
-         TABLE_ELEMENT_WIDTH, results_revers[i].swaps_total / REPETITIONS
+         TABLE_ELEMENT_WIDTH, results_revers[i].time_total,
+         TABLE_ELEMENT_WIDTH, results_revers[i].comparisons_total,
+         TABLE_ELEMENT_WIDTH, results_revers[i].swaps_total
       );
 
       printf("| %-*s | %-*s | %-*d | %-*lf | %-*lld | %-*lld |\n", 
