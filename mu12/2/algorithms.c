@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-long g_comparisons, g_swaps;
+long long g_comparisons, g_swaps;
 
 void bubble_sort(int* array, int size) {
    int swapped, tmp;
@@ -11,7 +11,7 @@ void bubble_sort(int* array, int size) {
 
       for (int i = 0; i < size - 1; ++i) {
          if (array[i] > array[i + 1]) {
-            int tmp = array[i];
+            tmp = array[i];
             array[i] = array[i + 1];
             array[i + 1] = tmp;
             swapped = 1;
@@ -33,7 +33,6 @@ void swap(int* a, int* b) {
 int partition(int* array, int begin, int end) {
    int mid = (end + begin) / 2;
    swap(&array[mid], &array[end]);
-   ++g_swaps;
    int pivot = array[end];
    int i = begin - 1;
 
@@ -77,9 +76,9 @@ void insertion_sort(int* array, int size) {
 
       if (j != i) {
          array[j] = tmp;
-         ++i;
          ++g_swaps;
       }
+      ++i;
    }
 }
 
@@ -98,7 +97,7 @@ void selection_sort(int* array, int size) {
       }
 
       if (min != i) {
-         int tmp = array[min] = array[i];
+         array[min] = array[i];
          array[i] = min_value;
          ++g_swaps;
       }
