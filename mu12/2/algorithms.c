@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// selection swaps
 long long g_comparisons, g_swaps;
 
 void bubble_sort(int* array, int size) {
@@ -23,6 +25,7 @@ void bubble_sort(int* array, int size) {
 }
 
 
+
 void swap(int* a, int* b) {
    int tmp = *a;
    *a = *b;
@@ -32,7 +35,9 @@ void swap(int* a, int* b) {
 
 int partition(int* array, int begin, int end) {
    int mid = (end + begin) / 2;
-   swap(&array[mid], &array[end]);
+   if (mid != end) {
+      swap(&array[mid], &array[end]);
+   }
    int pivot = array[end];
    int i = begin - 1;
 
@@ -40,13 +45,17 @@ int partition(int* array, int begin, int end) {
       if (array[j] < pivot) {
          
          ++i;
-         swap(array + i, array + j);
+         if ( i != j) {
+            swap(array + i, array + j);
+         }
       }
       ++g_comparisons;
    }
 
    ++i;
-   swap(array + i, array + end);
+   if (i != end) {
+      swap(array + i, array + end);
+   }
    return i;
 }
 
@@ -60,6 +69,7 @@ void quicksort(int* array, int begin, int end) {
 }
 
 
+
 void insertion_sort(int* array, int size) {
    int i = 1;
 
@@ -67,12 +77,14 @@ void insertion_sort(int* array, int size) {
       int tmp = array[i];
       int j = i;
 
+      ++g_comparisons;
       while (j > 0 && array[j - 1] > tmp) {
          ++g_swaps;
          array[j] = array[j - 1];
          --j;
+         ++g_comparisons;
       }
-      ++g_comparisons;
+      
 
       if (j != i) {
          array[j] = tmp;
@@ -81,6 +93,7 @@ void insertion_sort(int* array, int size) {
       ++i;
    }
 }
+
 
 
 void selection_sort(int* array, int size) {
@@ -105,6 +118,7 @@ void selection_sort(int* array, int size) {
 }
 
 
+
 void merge(int *array, int begin, int middle, int end, int *tmp_arr) {
    for (int i = begin; i < end; ++i)
       tmp_arr[i] = array[i]; // copy array
@@ -114,12 +128,14 @@ void merge(int *array, int begin, int middle, int end, int *tmp_arr) {
 
    for (int k = begin; k < end; ++k) {
       if (i < middle && (j >= end || tmp_arr[i] <= tmp_arr[j]) ) {
-         if ( !(j >= end) ) ++g_comparisons;
+         // if ( !(j >= end) ) ++g_comparisons;
+
          array[k] = tmp_arr[i];
          ++i;
          ++g_swaps;
       } else {
-         if ( !(j >= end) ) ++g_comparisons;
+         // if ( !(j >= end) ) ++g_comparisons;
+
          array[k] = tmp_arr[j];
          j++;
          ++g_swaps;

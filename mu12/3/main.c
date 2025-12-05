@@ -179,7 +179,7 @@ int main() {
    }
 
    char Title[ALGORITHMS_NUM * TABLE_ELEMENT_WIDTH];
-   sprintf(Title, "Results (num of randomized arrays = %d)", REPETITIONS);
+   sprintf(Title, "Results [ array's size = %d ] [ number of random array's = %d ]", ARRAY_SIZE, REPETITIONS);
    print_res(results_normal, results_reverse, results_random, Title);
 
    return 0;
