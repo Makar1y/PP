@@ -1,8 +1,8 @@
 #ifndef ALGORITHMS_H_
 #define ALGORITHMS_H_
 
-// move to main.c
-// long long g_comparisons, g_swaps;
+// can find in quicksort.c
+extern long long g_comparisons, g_swaps;
 
 void bubble_sort(int *array, int size);
 

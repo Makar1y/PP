@@ -1,4 +1,4 @@
-extern long long g_comparisons, g_swaps;
+long long g_comparisons, g_swaps;
 
 void swap(int* a, int* b) {
    int tmp = *a;
