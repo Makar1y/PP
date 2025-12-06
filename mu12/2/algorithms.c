@@ -1,5 +1,7 @@
 long long g_comparisons, g_swaps;
 
+
+
 void bubble_sort(int* array, int size) {
    int swapped, tmp;
 

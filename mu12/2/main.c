@@ -16,11 +16,11 @@
 typedef union {
    void (*quicksort)(int*, int, int);
    void (*not_quicksort)(int*, int);
-} alg;
+} func;
 
 typedef struct {
    char name[TABLE_ELEMENT_WIDTH];
-   alg function;
+   func function;
    int sorted;
    double time_total;
    long long comparisons_total;
@@ -94,7 +94,7 @@ void test_sort_algorithm(algorithm_results *results, int *array, int size) {
    }
    
 
-   results->time_total += (double)(end_time- start_time) / CLOCKS_PER_SEC;
+   results->time_total += (double)(end_time - start_time) / CLOCKS_PER_SEC;
    results->comparisons_total += g_comparisons;
    results->swaps_total += g_swaps;
    int sorted = is_sorted(array, size);

@@ -16,11 +16,11 @@
 typedef union {
    void (*quicksort)(int*, int, int);
    void (*not_quicksort)(int*, int);
-} alg;
+} func;
 
 typedef struct {
    char name[TABLE_ELEMENT_WIDTH];
-   alg function;
+   func function;
    int sorted;
    double time_total;
    long long comparisons_total;
